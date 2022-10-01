@@ -1,0 +1,83 @@
+<template>
+  <v-container>
+    <div class="pa-4 my-5 rounded-lg custom-shadow">
+      <div class="d-flex items-center">
+        <v-icon color="primary" size="75">mdi-cloud</v-icon>
+        <h1 class="regular text-3xl bold color-primary mr-2">
+          ایجاد سرور ابری
+        </h1>
+      </div>
+      <div class="my-10">
+        <h2 class="regular text-xl">انتخاب سیستم عامل</h2>
+        <div
+          :class="[
+            loading ? 'min-h-[200px] d-flex justify-center items-center' : null,
+          ]"
+        >
+          <loading v-if="loading" />
+          <operating-system v-else />
+        </div>
+      </div>
+      <v-divider></v-divider>
+      <div class="my-10">
+        <h2 class="regular text-xl">انتخاب مشخصات سیستم</h2>
+        <div
+          :class="[
+            loading ? 'min-h-[200px] d-flex justify-center items-center' : null,
+          ]"
+        >
+          <loading v-if="loading" />
+          <operating-info v-else />
+        </div>
+      </div>
+      <v-divider></v-divider>
+      <div class="my-10">
+        <operating-software />
+      </div>
+      <v-divider></v-divider>
+      <div class="my-10">
+        <advanced-settings />
+      </div>
+      <v-divider></v-divider>
+      <div class="my-10">
+        <access-settings />
+      </div>
+      <div class="w-full">
+        <v-btn height="55" block color="primary">ایجاد سرور ابری</v-btn>
+      </div>
+    </div>
+  </v-container>
+</template>
+
+<script>
+import OperatingSystem from "@/components/app/operating-system/OperatingSystem.vue";
+import OperatingInfo from "@/components/app/operating-info/OperatingInfo.vue";
+import OperatingSoftware from "@/components/app/operating-software/OperatingSoftware.vue";
+import AdvancedSettings from "@/components/app/advanced-settings/AdvancedSettings.vue";
+import AccessSettings from "@/components/app/access-settings/AccessSettings.vue";
+
+export default {
+  components: {
+    OperatingSystem,
+    OperatingInfo,
+    OperatingSoftware,
+    AdvancedSettings,
+    AccessSettings,
+  },
+  layout: "panel",
+
+  data() {
+    return {
+      loading: true,
+    };
+  },
+  mounted() {
+    setTimeout(() => {
+      this.loading = false;
+    }, 3000);
+  },
+};
+</script>
+
+<style>
+</style>
