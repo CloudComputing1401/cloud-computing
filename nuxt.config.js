@@ -1,6 +1,9 @@
 import colors from "vuetify/es5/util/colors";
 
 export default {
+  env: {
+    API_URL: process.env.API_URL,
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: "خدمات ابری دانشگاه کاشان",
@@ -26,9 +29,7 @@ export default {
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    {src:'~/plugins/GlobalComponents'}
-  ],
+  plugins: [{ src: "~/plugins/GlobalComponents" }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -49,7 +50,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: "/",
+    baseURL: process.env.API_URL,
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -60,18 +61,18 @@ export default {
       dark: false,
       themes: {
         light: {
-          primary: '#060d2d',
-          silver: '#E0F0F5',
-          green: '#01987A',
-          alert: '#2E1942',
-          accent: '#1b6939',
-          secondary: '#1b6939',
-          yellow: '#F8C23A',
+          primary: "#060d2d",
+          silver: "#E0F0F5",
+          green: "#01987A",
+          alert: "#2E1942",
+          accent: "#1b6939",
+          secondary: "#1b6939",
+          yellow: "#F8C23A",
           info: colors.teal.lighten1,
           warning: colors.amber.base,
-          error: '#EF476F',
-          success: '#06D6A0',
-          danger: '#EF476F',
+          error: "#EF476F",
+          success: "#06D6A0",
+          danger: "#EF476F",
         },
       },
     },
