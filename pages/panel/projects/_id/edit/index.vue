@@ -2,8 +2,8 @@
   <v-container>
     <div class="pa-4 my-5 rounded-lg custom-shadow">
       <div class="text-center mb-5">
-        <v-icon color="primary" size="75">mdi-cloud-print</v-icon>
-        <h1 class="font-weight-bold mt-3 text-2xl">ایجاد پروژه جدید</h1>
+        <v-icon color="primary" size="75">mdi-content-save-edit-outline</v-icon>
+        <h1 class="font-weight-bold mt-3 text-2xl">ویرایش پروژه</h1>
       </div>
       <v-row justify="center">
         <v-col cols="12" sm="6">
@@ -15,7 +15,7 @@
               class="primary"
               height="50"
               @click="$router.push('/panel/projects/ali')"
-              >ایجاد پروژه</v-btn
+              >ویرایش پروژه</v-btn
             >
           </v-form>
         </v-col>
