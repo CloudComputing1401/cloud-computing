@@ -50,11 +50,11 @@
 </template>
 
 <script>
-import OperatingSystem from "@/components/app/operating-system/OperatingSystem.vue";
-import OperatingInfo from "@/components/app/operating-info/OperatingInfo.vue";
-import OperatingSoftware from "@/components/app/operating-software/OperatingSoftware.vue";
-import AdvancedSettings from "@/components/app/advanced-settings/AdvancedSettings.vue";
-import AccessSettings from "@/components/app/access-settings/AccessSettings.vue";
+import OperatingSystem from "@/components/app/panel/operating-system/OperatingSystem.vue";
+import OperatingInfo from "@/components/app/panel/operating-info/OperatingInfo.vue";
+import OperatingSoftware from "@/components/app/panel/operating-software/OperatingSoftware.vue";
+import AdvancedSettings from "@/components/app/panel/advanced-settings/AdvancedSettings.vue";
+import AccessSettings from "@/components/app/panel/access-settings/AccessSettings.vue";
 
 export default {
   components: {
