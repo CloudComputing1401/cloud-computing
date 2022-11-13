@@ -42,6 +42,9 @@
       <div class="my-10">
         <access-settings />
       </div>
+      <div class="my-10">
+        <machin-info />
+      </div>
       <div class="w-full">
         <v-btn height="55" block color="primary">ایجاد سرور ابری</v-btn>
       </div>
@@ -55,6 +58,7 @@ import OperatingInfo from "@/components/app/panel/operating-info/OperatingInfo.v
 import OperatingSoftware from "@/components/app/panel/operating-software/OperatingSoftware.vue";
 import AdvancedSettings from "@/components/app/panel/advanced-settings/AdvancedSettings.vue";
 import AccessSettings from "@/components/app/panel/access-settings/AccessSettings.vue";
+import MachinInfo from "@/components/app/panel/machin-info/MachinInfo.vue";
 
 export default {
   components: {
@@ -63,6 +67,7 @@ export default {
     OperatingSoftware,
     AdvancedSettings,
     AccessSettings,
+    MachinInfo,
   },
   layout: "panel",
 
