@@ -1,8 +1,10 @@
 <template>
   <div class="d-flex justify-center items-center h-full w-full">
-    <div class="w-[1000px] min-h-[550px] bg-white custom-shadow rounded-[20px] m-5">
+    <div
+      class="w-[1000px] min-h-[550px] bg-white custom-shadow rounded-[20px] m-5"
+    >
       <v-row>
-        <v-col cols="12" md="5" class="pl-0">
+        <v-col cols="12" md="5" class="pl-md-0">
           <div class="p-3">
             <h1 class="regular text-center text-2xl mt-5 mb-3">
               ورود به پنل کاربری
@@ -11,7 +13,15 @@
               <v-expand-transition>
                 <div
                   v-if="errorMessage"
-                  class="w-full h-full border-2 border-red-500 rounded-md p-4 d-flex items-center"
+                  class="
+                    w-full
+                    h-full
+                    border-2 border-red-500
+                    rounded-md
+                    p-4
+                    d-flex
+                    items-center
+                  "
                 >
                   <v-icon color="red">mdi-alert-circle-outline</v-icon>
                   <h3 class="mr-2 regular text-lg">
@@ -22,19 +32,45 @@
             </div>
             <v-expand-transition>
               <div v-if="!forgetPass" class="w-full mt-5">
-                <v-form>
+                <v-form
+                  ref="validForm"
+                  v-model="validForm"
+                  lazy-validation
+                  @submit.prevent="login"
+                >
                   <v-text-field
                     v-model="email"
                     outlined
                     label="ایمیل"
                     placeholder="ایمیل خود را وارد کنید"
+                    :rules="[
+                      (v) => !!v || 'وارد کردن ایمیل الزامی است',
+                      (v) =>
+                        !v.match(/^[\u0600-\u06FF\s]+$/) ||
+                        'ایمیل با حروف انگلیسی است.',
+                      (v) =>
+                        v.length === 0 ||
+                        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+                          v
+                        ) ||
+                        'ایمیل اشتباه است.',
+                    ]"
                   />
                   <v-text-field
                     v-model="password"
+                    :type="showPassword ? 'text' : 'password'"
                     outlined
-                    label="رمز عبور"
-                    placeholder="رمز عبور خود را وارد کنید"
-                    :rules="[(v) => !!v || 'وارد کردن رمز عبور الزامی است']"
+                    label="پسوورد"
+                    placeholder="پسوورد خود را وارد کنید"
+                    :rules="[
+                      (v) => !!v || 'وارد کردن رمز عبور الزامی است.',
+                      (v) =>
+                        v.length >= 8 ||
+                        'رمز عبور حداقل باید شامل ۸کارکتر باشد.',
+                    ]"
+                    maxlength="50"
+                    :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                    @click:append="showPassword = !showPassword"
                   />
                   <div
                     class="d-flex flex-row-reverse cursor-pointer"
@@ -45,19 +81,36 @@
                     >
                   </div>
                   <div class="mt-4">
-                    <v-btn block height="50" color="primary" @click="login()">
+                    <v-btn
+                      type="submit"
+                      block
+                      height="50"
+                      color="primary"
+                      :disabled="!validForm"
+                    >
                       <span class="text-base text-white">ورود</span>
                     </v-btn>
-                    <nuxt-link to="/register">
-                      <div
-                        v-ripple
-                        class="w-full h-[50px] d-flex items-center justify-center bg-[#E0E0E0] rounded-md mt-3 text-black regular"
-                      >
-                        ثبت نام
-                      </div>
-                    </nuxt-link>
                   </div>
                 </v-form>
+                <nuxt-link to="/register">
+                  <div
+                    v-ripple
+                    class="
+                      w-full
+                      h-[50px]
+                      d-flex
+                      items-center
+                      justify-center
+                      bg-[#E0E0E0]
+                      rounded-md
+                      mt-3
+                      text-black
+                      regular
+                    "
+                  >
+                    ثبت نام
+                  </div>
+                </nuxt-link>
               </div>
             </v-expand-transition>
             <v-expand-transition>
@@ -86,13 +139,26 @@ export default {
     return {
       email: "",
       password: "",
+      showPassword: false,
       forgetPass: false,
       errorMessage: false,
+      validForm: true,
     };
   },
   methods: {
-    login() {
-      this.$router.push("/panel");
+    async login() {
+      if (this.$refs.validForm.validate()) {
+        try {
+          const data = await this.$axios.post("users/token/", {
+            password: this.password,
+            email: this.email,
+          });
+          console.log(data, "ali");
+          this.$router.push("/panel");
+        } catch (err) {
+          console.log(err);
+        }
+      }
     },
   },
 };
