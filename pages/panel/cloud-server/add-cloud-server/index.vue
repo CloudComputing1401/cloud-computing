@@ -53,12 +53,12 @@
 </template>
 
 <script>
-import OperatingSystem from "@/components/app/panel/operating-system/OperatingSystem.vue";
-import OperatingInfo from "@/components/app/panel/operating-info/OperatingInfo.vue";
-import OperatingSoftware from "@/components/app/panel/operating-software/OperatingSoftware.vue";
-import AdvancedSettings from "@/components/app/panel/advanced-settings/AdvancedSettings.vue";
-import AccessSettings from "@/components/app/panel/access-settings/AccessSettings.vue";
-import MachinInfo from "@/components/app/panel/machin-info/MachinInfo.vue";
+import OperatingSystem from "@/components/app/panel/create/operating-system/OperatingSystem.vue";
+import OperatingInfo from "@/components/app/panel/create/operating-info/OperatingInfo.vue";
+import OperatingSoftware from "@/components/app/panel/create/operating-software/OperatingSoftware.vue";
+import AdvancedSettings from "@/components/app/panel/create/advanced-settings/AdvancedSettings.vue";
+import AccessSettings from "@/components/app/panel/create/access-settings/AccessSettings.vue";
+import MachinInfo from "@/components/app/panel/create/machin-info/MachinInfo.vue";
 
 export default {
   components: {
