@@ -16,10 +16,10 @@
 </template>
 
 <script>
-import CloudServers from "./cloud-servers/CloudServers.vue";
-import GraphicsMachines from "./graphics-machines/GraphicsMachines.vue";
-import HeavyComputingServers from "./heavy-computing-servers/HeavyComputingServers.vue";
-import HaedDisks from "./volumes/HardDisks.vue";
+import CloudServers from "./../../cloud-servers/CloudServers.vue";
+import GraphicsMachines from "./../../graphics-machines/GraphicsMachines.vue";
+import HeavyComputingServers from "./../../heavy-computing-servers/HeavyComputingServers.vue";
+import HaedDisks from "./../../volumes/HardDisks.vue";
 export default {
   components: {
     CloudServers,
