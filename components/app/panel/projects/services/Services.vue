@@ -1,35 +1,34 @@
 <template>
   <div>
     <div>
-      <cloud-servers />
+      <project-cloud-server />
     </div>
     <div>
-      <heavy-computing-servers />
+      <project-heavy-computing />
     </div>
     <div>
-      <graphics-machines />
+      <project-graphic-machin />
     </div>
     <div>
-      <haed-disks />
+      <project-hard-disk />
     </div>
   </div>
 </template>
 
 <script>
-import CloudServers from "./../../cloud-servers/CloudServers.vue";
-import GraphicsMachines from "./../../graphics-machines/GraphicsMachines.vue";
-import HeavyComputingServers from "./../../heavy-computing-servers/HeavyComputingServers.vue";
-import HaedDisks from "./../../volumes/HardDisks.vue";
+import ProjectCloudServer from "./ProjectCloudServer.vue";
+import ProjectGraphicMachin from "./ProjectGraphicMachin.vue";
+import ProjectHardDisk from "./ProjectHardDisk.vue";
+import ProjectHeavyComputing from "./ProjectHeavyComputing.vue";
 export default {
   components: {
-    CloudServers,
-    GraphicsMachines,
-    HaedDisks,
-    HeavyComputingServers,
+    ProjectCloudServer,
+    ProjectHeavyComputing,
+    ProjectGraphicMachin,
+    ProjectHardDisk,
   },
 };
 </script>
 
-<s
-    CloudServerstyle>
+<style>
 </style>
