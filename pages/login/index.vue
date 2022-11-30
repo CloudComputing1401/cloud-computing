@@ -149,11 +149,11 @@ export default {
     async login() {
       if (this.$refs.validForm.validate()) {
         try {
-          const data = await this.$axios.post("users/token/", {
-            password: this.password,
-            email: this.email,
-          });
-          console.log(data, "ali");
+          // const data = await this.$axios.post("users/token/", {
+          //   password: this.password,
+          //   email: this.email,
+          // });
+          // console.log(data, "ali");
           this.$router.push("/panel");
         } catch (err) {
           console.log(err);
