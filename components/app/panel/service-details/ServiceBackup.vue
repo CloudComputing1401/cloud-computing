@@ -165,9 +165,9 @@ export default {
   }),
   methods: {
     ali() {
-      if (this.$refs.validForm.validate()) {
-        console.log(this.backupName, "hiiiiiiii");
-      }
+      // if (this.$refs.validForm.validate()) {
+      //   console.log(this.backupName, "hiiiiiii");
+      // }
     },
   },
 };
