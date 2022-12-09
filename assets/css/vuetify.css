@@ -8,4 +8,13 @@
 
 .v-btn {
   height: 55px !important;
+  letter-spacing: 0 !important;
+}
+
+.v-tab {
+  letter-spacing: 0 !important;
+}
+
+.v-data-table {
+  border: 1px solid #d0d0d0 !important;
 }

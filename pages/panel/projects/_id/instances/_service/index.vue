@@ -68,28 +68,18 @@
           <v-tab-item>
             <console-access />
           </v-tab-item>
-        </v-tabs-items>
-        <v-tabs-items v-model="tab">
           <v-tab-item>
             <service-charts />
           </v-tab-item>
-        </v-tabs-items>
-        <v-tabs-items v-model="tab">
           <v-tab-item>
             <service-settings />
           </v-tab-item>
-        </v-tabs-items>
-        <v-tabs-items v-model="tab">
           <v-tab-item>
             <service-backup />
           </v-tab-item>
-        </v-tabs-items>
-        <v-tabs-items v-model="tab">
           <v-tab-item>
             <service-hard-disks />
           </v-tab-item>
-        </v-tabs-items>
-        <v-tabs-items v-model="tab">
           <v-tab-item>
             <service-firewall />
           </v-tab-item>
@@ -144,5 +134,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
