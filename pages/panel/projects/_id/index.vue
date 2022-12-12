@@ -34,17 +34,17 @@
           </v-tab-item>
           <v-tab-item>
             <v-card flat>
-              <setting />
+              <project-setting />
             </v-card>
           </v-tab-item>
           <v-tab-item>
             <v-card flat>
-              <firewall />
+              <project-firewall />
             </v-card>
           </v-tab-item>
           <v-tab-item>
             <v-card flat>
-              <backup-copies />
+              <project-backup-copies />
             </v-card>
           </v-tab-item>
         </v-tabs-items>
@@ -54,12 +54,17 @@
 </template>
 
 <script>
-import BackupCopies from "../../../../components/app/panel/projects/backup/BackupCopies.vue";
-import Firewall from "../../../../components/app/panel/projects/firewall/Firewall.vue";
+import ProjectBackupCopies from "../../../../components/app/panel/projects/project-backup/ProjectBackupCopies.vue";
+import ProjectFirewall from "../../../../components/app/panel/projects/project-firewall/ProjectFirewall.vue";
+import ProjectSetting from "../../../../components/app/panel/projects/project-setting/ProjectSetting.vue";
 import Services from "../../../../components/app/panel/projects/services/Services.vue";
-import Setting from "../../../../components/app/panel/projects/setting/Setting.vue";
 export default {
-  components: { Services, Setting, Firewall, BackupCopies },
+  components: {
+    Services,
+    ProjectSetting,
+    ProjectFirewall,
+    ProjectBackupCopies,
+  },
   layout: "panel",
   data() {
     return {

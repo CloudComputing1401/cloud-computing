@@ -23,12 +23,15 @@
             loading || serverCloudData.length === 0
               ? 'd-flex justify-center items-center'
               : null,
-            'min-h-[250px]',
+            'min-h-[250px] pt-[20px]',
           ]"
         >
           <loading v-if="loading" />
-          <template v-if="!loading && serverCloudData.length === 0">
-            <h1 class="regular text-xl">سرور ابری یافت نشد!</h1>
+          <template v-if="!loading">
+            <cloud-servers v-for="(i, index) in serverCloudData" :key="index" />
+            <div v-if="serverCloudData.length === 0">
+              <h1 class="regular text-xl">سرور ابری یافت نشد!</h1>
+            </div>
           </template>
         </div>
       </div>
@@ -37,11 +40,14 @@
 </template>
 
 <script>
+import CloudServers from "../../../components/app/panel/cloud-servers/CloudServers.vue";
+
 export default {
   layout: "panel",
+  components: { CloudServers },
   data() {
     return {
-      serverCloudData: [],
+      serverCloudData: ["ali"],
       loading: true,
     };
   },
