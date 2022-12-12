@@ -109,9 +109,9 @@
 </template>
 
 <script>
-import DeleteBackup from "../dialogs/backup-dialogs/delete-dialog/DeleteBackup.vue";
-import EditBackup from "../dialogs/backup-dialogs/edit-backup/EditBackup.vue";
-import UseBackup from "../dialogs/backup-dialogs/use-backup/UseBackup.vue";
+import DeleteBackup from "./backup-dialogs/delete-dialog/DeleteBackup.vue";
+import EditBackup from "./backup-dialogs/edit-backup/EditBackup.vue";
+import UseBackup from "./backup-dialogs/use-backup/UseBackup.vue";
 export default {
   components: { UseBackup, EditBackup, DeleteBackup },
   data: () => ({

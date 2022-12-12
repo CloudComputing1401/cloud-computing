@@ -7,8 +7,12 @@
 }
 
 .v-btn {
-  height: 55px !important;
+  height: 50px !important;
   letter-spacing: 0 !important;
+}
+
+.v-btn.v-size--default{
+  font-size: 18px;
 }
 
 .v-tab {

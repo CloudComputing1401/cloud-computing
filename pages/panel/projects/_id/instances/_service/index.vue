@@ -91,12 +91,12 @@
 </template>
 
 <script>
-import ServiceCharts from "../../../../../../components/app/panel/service-details/ServiceCharts.vue";
-import ConsoleAccess from "../../../../../../components/app/panel/service-details/ConsoleAccess.vue";
-import ServiceSettings from "../../../../../../components/app/panel/service-details/ServiceSettings.vue";
-import ServiceBackup from "../../../../../../components/app/panel/service-details/ServiceBackup.vue";
-import ServiceHardDisks from "../../../../../../components/app/panel/service-details/ServiceHardDisks.vue";
-import ServiceFirewall from "../../../../../../components/app/panel/service-details/ServiceFirewall.vue";
+import ServiceCharts from "../../../../../../components/app/panel/service-details/service-charts/ServiceCharts.vue";
+import ConsoleAccess from "../../../../../../components/app/panel/service-details/console-access/ConsoleAccess.vue";
+import ServiceSettings from "../../../../../../components/app/panel/service-details/service-settings/ServiceSettings.vue";
+import ServiceBackup from "../../../../../../components/app/panel/service-details/service-backup/ServiceBackup.vue";
+import ServiceHardDisks from "../../../../../../components/app/panel/service-details/service-hard-disks/ServiceHardDisks.vue";
+import ServiceFirewall from "../../../../../../components/app/panel/service-details/service-firewall/ServiceFirewall.vue";
 
 export default {
   layout: "panel",

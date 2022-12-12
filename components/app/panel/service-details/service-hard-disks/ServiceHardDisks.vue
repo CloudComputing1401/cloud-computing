@@ -34,7 +34,7 @@
             </v-btn>
           </template>
           <v-list>
-            <v-list-item link>
+            <v-list-item link @click="splitHardDiskDialog = true">
               <v-list-item-title>جداسازی هارد دیسک</v-list-item-title>
             </v-list-item>
             <v-list-item link>
@@ -43,7 +43,7 @@
             <v-list-item link disabled>
               <v-list-item-title>ویرایش</v-list-item-title>
             </v-list-item>
-            <v-list-item link>
+            <v-list-item link @click="deleteHardDialog = true">
               <v-list-item-title class="text-red-500"
                 >حذف هارد دیسک</v-list-item-title
               >
@@ -52,12 +52,23 @@
         </v-menu>
       </template>
     </v-data-table>
+    <v-dialog v-model="splitHardDiskDialog" max-width="600">
+      <split-hard-disk @closeDialog="splitHardDiskDialog = false" />
+    </v-dialog>
+    <v-dialog v-model="deleteHardDialog" max-width="600">
+      <delete-hard-disk @closeDialog="deleteHardDialog = false" />
+    </v-dialog>
   </div>
 </template>
 
 <script>
+import DeleteHardDisk from "./hard-disk-dialog/delete-hard-disk/DeleteHardDisk.vue";
+import SplitHardDisk from "./hard-disk-dialog/split-hard-disk/SplitHardDisk.vue";
 export default {
+  components: { SplitHardDisk, DeleteHardDisk },
   data: () => ({
+    splitHardDiskDialog: false,
+    deleteHardDialog: false,
     headers: [
       {
         text: "",

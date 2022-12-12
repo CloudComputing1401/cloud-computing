@@ -115,11 +115,11 @@
 </template>
 
 <script>
-import DeleteMachine from "../dialogs/setting-dialogs/delete-machine/DeleteMachine.vue";
-import HardwareReboot from "../dialogs/setting-dialogs/hardware-reboot/HardwareReboot.vue";
-import SoftwareReboot from "../dialogs/setting-dialogs/software-reboot/SoftwareReboot.vue";
-import StopMachine from "../dialogs/setting-dialogs/stop-machine/StopMachine.vue";
-import TurnOffMachine from "../dialogs/setting-dialogs/turnoff-machine/TurnOffMachine.vue";
+import DeleteMachine from "./setting-dialogs/delete-machine/DeleteMachine.vue";
+import HardwareReboot from "./setting-dialogs/hardware-reboot/HardwareReboot.vue";
+import SoftwareReboot from "./setting-dialogs/software-reboot/SoftwareReboot.vue";
+import StopMachine from "./setting-dialogs/stop-machine/StopMachine.vue";
+import TurnOffMachine from "./setting-dialogs/turnoff-machine/TurnOffMachine.vue";
 export default {
   components: {
     HardwareReboot,
