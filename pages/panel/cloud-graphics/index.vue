@@ -6,7 +6,11 @@
         <h1 class="regular text-3xl bold color-primary mr-2">گرافیک ابری</h1>
       </div>
       <div class="d-flex flex-row-reverse my-5">
-        <v-btn color="primary" height="55" @click="$router.push('/panel/projects/add-project')">
+        <v-btn
+          color="primary"
+          height="55"
+          @click="$router.push('/panel/projects/add-project')"
+        >
           <v-icon>mdi-plus</v-icon>
           <span>ایجاد گرافیک ابری جدید</span>
         </v-btn>
@@ -16,15 +20,21 @@
         <h2 class="regular text-xl">لیست گرافیک های ابری</h2>
         <div
           :class="[
-            loading || projectData.length === 0
+            loading || graphicCloudData.length === 0
               ? 'd-flex justify-center items-center'
               : null,
-            'min-h-[250px]',
+            'min-h-[250px] pt-[20px]',
           ]"
         >
-          <loading v-if="loading"/>
-          <template v-if="!loading && projectData.length === 0">
-            <h1 class="regular text-xl">اطلاعاتی یافت نشد!</h1>
+          <loading v-if="loading" />
+          <template v-if="!loading">
+            <graphics-machines
+              v-for="(i, index) in graphicCloudData"
+              :key="index"
+            />
+            <div v-if="graphicCloudData.length === 0">
+              <h1 class="regular text-xl">سرور ابری یافت نشد!</h1>
+            </div>
           </template>
         </div>
       </div>
@@ -33,17 +43,19 @@
 </template>
 
 <script>
+import GraphicsMachines from "../../../components/app/panel/graphics-machines/GraphicsMachines.vue";
 export default {
+  components: { GraphicsMachines },
   layout: "panel",
   data() {
     return {
-      projectData: [],
+      graphicCloudData: ["ali"],
       loading: true,
     };
   },
   mounted() {
     setTimeout(() => {
-      this.loading = false
+      this.loading = false;
     }, 4000);
   },
 };

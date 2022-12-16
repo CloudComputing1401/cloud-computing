@@ -1,11 +1,11 @@
 <template>
   <v-dialog v-model="stopMachineDialog" max-width="600">
     <div class="p-4 bg-white relative">
-      <v-icon
-        class="cursor-pointer absolute left-1 top-1"
-        @click="stopMachineDialog = false"
-        >mdi-close</v-icon
-      >
+      <div class="absolute left-4 top-4">
+        <v-icon class="cursor-pointer" @click="stopMachineDialog = false"
+          >mdi-close</v-icon
+        >
+      </div>
       <h1 class="text-[24px] font-bold my-4 text-center">
         متوقف کردن
         {{ machineData.name }}

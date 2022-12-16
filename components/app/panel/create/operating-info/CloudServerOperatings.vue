@@ -4,7 +4,7 @@
       <v-tabs-slider color="primary"></v-tabs-slider>
 
       <v-tab> بسته های پیشنهادی </v-tab>
-      <v-tab> بسته های دلخواه </v-tab>
+      <!-- <v-tab> بسته های دلخواه </v-tab> -->
     </v-tabs>
     <v-tabs-items v-model="tab">
       <v-tab-item>
@@ -25,14 +25,14 @@
           </v-col>
         </v-row>
       </v-tab-item>
-      <v-tab-item>
+      <!-- <v-tab-item>
         <div class="mt-3 border p-3 rounded-md">
           <h1 class="text-lg">
             در صورتی که مشخصات مدنظر خود را نیافته اید، در این قسمت می توانید
             مشخصات مورد نیاز خود را به صورت دلخواه تعیین کنید.
           </h1>
         </div>
-      </v-tab-item>
+      </v-tab-item> -->
     </v-tabs-items>
   </div>
 </template>

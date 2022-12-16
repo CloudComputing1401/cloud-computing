@@ -25,7 +25,9 @@
           <div>
             برای دسترسی راحت تر به ماشین در این قسمت کلید خود را مشخص کنید.
           </div>
-          <v-btn color="primary">افزودن کلید</v-btn>
+          <v-btn color="primary" @click="addSshkeyDialog = true"
+            >افزودن کلید</v-btn
+          >
         </div>
         <v-expansion-panels accordion>
           <v-expansion-panel>
@@ -48,14 +50,20 @@
         </v-expansion-panels>
       </div>
     </div>
+    <v-dialog max-width="600" v-model="addSshkeyDialog">
+      <add-ssh-key @closeDialog="addSshkeyDialog = false" />
+    </v-dialog>
   </div>
 </template>
 
 <script>
+import AddSshKey from "./add-ssh-key/AddSshKey.vue";
 export default {
+  components: { AddSshKey },
   data() {
     return {
       radioGroup: 1,
+      addSshkeyDialog: false,
     };
   },
   watch: {

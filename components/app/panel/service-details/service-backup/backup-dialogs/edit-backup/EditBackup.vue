@@ -1,10 +1,10 @@
 <template>
   <div class="p-4 bg-white relative">
-    <v-icon
-      class="cursor-pointer absolute right-1 top-1"
-      @click="editBackupDialog = false"
-      >mdi-close</v-icon
-    >
+    <div class="absolute left-4 top-4">
+      <v-icon class="cursor-pointer" @click="editBackupDialog = false"
+        >mdi-close</v-icon
+      >
+    </div>
     <h1 class="text-[24px] font-bold my-4 text-center">ویرایش نسخه پشتیبان</h1>
     <div>
       <v-form>
