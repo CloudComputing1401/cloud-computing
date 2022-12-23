@@ -167,9 +167,9 @@ export default {
     };
   },
   methods: {
-    logOut(){
-      this.$router.push('/')
-    }
+    logOut() {
+      this.$router.push("/");
+    },
   },
 };
 </script>

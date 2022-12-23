@@ -8,7 +8,7 @@
         </h1>
       </div>
       <div class="my-10">
-        <h2 class="regular text-xl">انتخاب سیستم عامل</h2>
+        <h2 class="regular text-xl font-semibold">انتخاب سیستم عامل</h2>
         <div
           :class="[
             loading ? 'min-h-[200px] d-flex justify-center items-center' : null,
@@ -20,14 +20,14 @@
       </div>
       <v-divider></v-divider>
       <div class="my-10">
-        <h2 class="regular text-xl">انتخاب مشخصات سیستم</h2>
+        <h2 class="regular text-xl font-semibold">انتخاب مشخصات سیستم</h2>
         <div
           :class="[
             loading ? 'min-h-[200px] d-flex justify-center items-center' : null,
           ]"
         >
           <loading v-if="loading" />
-          <operating-info v-else />
+          <cloud-server-operatings v-else />
         </div>
       </div>
       <v-divider></v-divider>
@@ -54,20 +54,20 @@
 
 <script>
 import OperatingSystem from "@/components/app/panel/create/operating-system/OperatingSystem.vue";
-import OperatingInfo from "@/components/app/panel/create/operating-info/OperatingInfo.vue";
 import OperatingSoftware from "@/components/app/panel/create/operating-software/OperatingSoftware.vue";
 import AdvancedSettings from "@/components/app/panel/create/advanced-settings/AdvancedSettings.vue";
 import AccessSettings from "@/components/app/panel/create/access-settings/AccessSettings.vue";
 import MachinInfo from "@/components/app/panel/create/machin-info/MachinInfo.vue";
+import CloudServerOperatings from "@/components/app/panel/create/operating-info/CloudServerOperatings.vue";
 
 export default {
   components: {
     OperatingSystem,
-    OperatingInfo,
     OperatingSoftware,
     AdvancedSettings,
     AccessSettings,
     MachinInfo,
+    CloudServerOperatings,
   },
   layout: "panel",
 

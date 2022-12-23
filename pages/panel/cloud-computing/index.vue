@@ -20,15 +20,21 @@
         <h2 class="regular text-xl">لیست سرورهای محاسبات سنگین</h2>
         <div
           :class="[
-            loading || projectData.length === 0
+            loading || cloudComputingData.length === 0
               ? 'd-flex justify-center items-center'
               : null,
-            'min-h-[250px]',
+            'min-h-[250px] pt-5',
           ]"
         >
           <loading v-if="loading" />
-          <template v-if="!loading && projectData.length === 0">
-            <h1 class="regular text-xl">اطلاعاتی دریافت نشد!</h1>
+          <template v-if="!loading">
+            <heavy-computing-servers
+              v-for="(i, index) in cloudComputingData"
+              :key="index"
+            />
+            <div v-if="cloudComputingData.length === 0">
+              <h1 class="regular text-xl">سرور ابری یافت نشد!</h1>
+            </div>
           </template>
         </div>
       </div>
@@ -37,11 +43,15 @@
 </template>
 
 <script>
+import HeavyComputingServers from "../../../components/app/panel/heavy-computing-servers/HeavyComputingServers.vue";
 export default {
   layout: "panel",
+  components: {
+    HeavyComputingServers,
+  },
   data() {
     return {
-      projectData: [],
+      cloudComputingData: ["ali"],
       loading: true,
     };
   },

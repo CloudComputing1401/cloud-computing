@@ -1,10 +1,10 @@
 <template>
   <div class="p-4 bg-white relative">
-    <v-icon
-      class="cursor-pointer absolute left-1 top-1"
-      @click="$emit('closeDialog')"
-      >mdi-close</v-icon
-    >
+    <div class="absolute left-4 top-4">
+      <v-icon class="cursor-pointer" @click="$emit('closeDialog')"
+        >mdi-close</v-icon
+      >
+    </div>
     <h1 class="text-[24px] font-bold my-4 text-center">جداسازی هارد دیسک</h1>
     <div class="mb-5 text-justify">
       آیا از جداسازی هارد دیسک از سرور ابری اطمینان دارید؟

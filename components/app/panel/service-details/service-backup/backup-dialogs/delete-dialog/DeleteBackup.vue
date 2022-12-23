@@ -1,11 +1,11 @@
 <template>
   <v-dialog v-model="deleteBackupDialog" max-width="600">
     <div class="p-4 bg-white relative">
-      <v-icon
-        class="cursor-pointer absolute left-1 top-1"
-        @click="useBackupDialog = false"
-        >mdi-close</v-icon
-      >
+      <div class="absolute left-4 top-4">
+        <v-icon class="cursor-pointer" @click="useBackupDialog = false"
+          >mdi-close</v-icon
+        >
+      </div>
       <h1 class="text-[24px] font-bold my-4 text-center">حذف نسخه پشتیبان</h1>
       <div class="mb-5 text-justify">
         آیا از حذف این نسخه پشتیبان اطمینان دارید؟
