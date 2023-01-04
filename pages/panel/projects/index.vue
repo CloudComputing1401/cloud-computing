@@ -30,8 +30,14 @@
           <template v-slot:[`item.row`]="{ index }">
             {{ index + 1 }}
           </template>
-          <template v-slot:[`item.more`]>
-            <v-btn text @click="$router.push('/panel/projects/ali')">
+          <template v-slot:[`item.description`]="{ item }">
+            <span v-if="item.description === null"> توضیحاتی وجود ندارد </span>
+            <span v-else>
+              {{ item.description.substring(0, 10) }}
+            </span>
+          </template>
+          <template v-slot:[`item.more`]="{ item }">
+            <v-btn text @click="$router.push(`/panel/projects/${item.id}`)">
               جزئیات پروژه
             </v-btn>
           </template>
@@ -77,22 +83,17 @@ export default {
     };
   },
   mounted() {
-    setTimeout(() => {
-      this.projectData = [
-        {
-          name: "پروژه اول",
-          description: "توضیحات پروژه",
-        },
-      ];
-      this.loading = false;
-    }, 2000);
+    this.getProjectsData();
   },
   methods: {
     async getProjectsData() {
       try {
-        const data = await this.$get("project/");
+        const data = await this.$axios.get("/service/project");
         console.log(data);
+        this.projectData = data.data;
+        this.loading = false;
       } catch (err) {
+        this.loading = false;
         console.log(err);
       }
     },

@@ -8,27 +8,11 @@
         </h1>
       </div>
       <div class="my-10">
-        <h2 class="regular text-xl font-semibold">انتخاب سیستم عامل</h2>
-        <div
-          :class="[
-            loading ? 'min-h-[200px] d-flex justify-center items-center' : null,
-          ]"
-        >
-          <loading v-if="loading" />
-          <operating-system v-else />
-        </div>
+        <operating-system />
       </div>
       <v-divider></v-divider>
       <div class="my-10">
-        <h2 class="regular text-xl font-semibold">انتخاب مشخصات سیستم</h2>
-        <div
-          :class="[
-            loading ? 'min-h-[200px] d-flex justify-center items-center' : null,
-          ]"
-        >
-          <loading v-if="loading" />
-          <cloud-server-operatings v-else />
-        </div>
+        <cloud-server-operatings />
       </div>
       <v-divider></v-divider>
       <div class="my-10">
