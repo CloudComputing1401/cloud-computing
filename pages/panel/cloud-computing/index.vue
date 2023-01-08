@@ -20,9 +20,7 @@
         <h2 class="regular text-xl">لیست سرورهای محاسبات سنگین</h2>
         <div
           :class="[
-            loading || cloudComputingData.length === 0
-              ? 'd-flex justify-center items-center'
-              : null,
+            loading || cloudComputingData.length === 0 ? 'flex-center' : null,
             'min-h-[250px] pt-5',
           ]"
         >

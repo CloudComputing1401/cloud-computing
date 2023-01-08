@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <div class="p-5 my-5 rounded-lg custom-shadow">
-      <div class="d-flex items-center justify-between">
+      <div class="flex-between">
         <div class="d-flex">
           <div class="bg-primary p-5 rounded-md">
             <v-icon color="#fff" size="90">mdi-server</v-icon>

@@ -1,11 +1,7 @@
 <template>
   <div>
     <h2 class="regular text-xl font-semibold">انتخاب مشخصات سیستم</h2>
-    <div
-      :class="[
-        loading ? 'min-h-[200px] d-flex justify-center items-center' : null,
-      ]"
-    >
+    <div :class="[loading ? 'min-h-[200px] flex-center' : null]">
       <loading v-if="loading" />
       <div v-else class="regular mt-4">
         <v-tabs v-model="tab" align-with-title>
@@ -41,13 +37,13 @@
                     <h3 class="text-lg">144,000 ریال/ روزانه</h3> -->
                   </div>
                   <div class="pa-2">
-                    <div class="my-2 d-flex items-center justify-center">
+                    <div class="my-2 flex-center">
                       <span class="text-sm">CPU</span>
                       <span class="mr-1 font-semibold text-lg">
                         {{ operatingInfo.cpu.size }}
                       </span>
                     </div>
-                    <div class="my-2 d-flex items-center justify-center">
+                    <div class="my-2 flex-center">
                       <span class="text-sm">RAM</span>
                       <span class="text-sm mx-1">
                         {{ operatingInfo.ram.unit.toUpperCase() }}
@@ -56,7 +52,7 @@
                         {{ operatingInfo.ram.size }}
                       </span>
                     </div>
-                    <div class="my-2 d-flex items-center justify-center">
+                    <div class="my-2 flex-center">
                       <span class="text-sm">RAM</span>
                       <span class="text-sm mx-1">
                         {{ operatingInfo.disk.unit.toUpperCase() }}

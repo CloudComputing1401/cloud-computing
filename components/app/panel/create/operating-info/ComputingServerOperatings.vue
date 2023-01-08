@@ -26,7 +26,7 @@
               </div>
             </div>
           </div>
-          <div class="d-flex justify-center items-center mb-[20px]">
+          <div class="flex-center mb-[20px]">
             <span>معمولی</span>
             <v-switch></v-switch>
             <span>ویژه</span>

@@ -8,9 +8,7 @@
             p-1
             w-[50px]
             h-[50px]
-            d-flex
-            justify-center
-            items-center
+            flex-center
             border border-[#060d2d]
             rounded-md
             cursor-pointer
@@ -37,9 +35,7 @@
                 w-[50px]
                 h-[50px]
                 lg:w-auto
-                d-flex
-                justify-center
-                items-center
+                flex-center
                 border border-[#060d2d]
                 rounded-md
               "
