@@ -19,10 +19,10 @@
             <div class="w-full h-[70px]">
               <v-expand-transition>
                 <div
-                  v-if="errorMessage"
+                  v-if="showError"
                   class="
                     w-full
-                    h-full
+                    h-[60px]
                     border-2 border-red-500
                     rounded-md
                     p-4
@@ -32,7 +32,7 @@
                 >
                   <v-icon color="red">mdi-alert-circle-outline</v-icon>
                   <h3 class="mr-2 regular text-base text-red-500">
-                    خطا در ارسال اطلاعات
+                    {{ errorMessage }}
                   </h3>
                 </div>
               </v-expand-transition>
@@ -160,16 +160,18 @@
         </v-col>
       </v-row>
     </div>
+    <snack-bar />
   </div>
 </template>
 
 <script>
-import registerVue from "../../components/app/register/register.vue";
+import SnackBar from "../../components/core/SnackBar/SnackBar.vue";
 export default {
   layout: "login",
   data() {
     return {
-      errorMessage: false,
+      showError: false,
+      errorMessage: "",
       registerData: {
         firstName: "",
         lastName: "",
@@ -202,7 +204,10 @@ export default {
           }, 2000);
         } catch (err) {
           this.loading = false;
-          console.log(err);
+          this.errorMessage = "مشکل در ارسال اطلاعات";
+          if (err.response.status === 400)
+            this.errorMessage = "ایمیل وارد شده تکراری میباشد";
+          this.showError = true;
         }
       }
     },

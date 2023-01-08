@@ -15,7 +15,7 @@
                   v-if="showError"
                   class="
                     w-full
-                    h-full
+                    h-[60px]
                     border-2 border-red-500
                     rounded-md
                     px-4
@@ -26,7 +26,7 @@
                 >
                   <v-icon color="red">mdi-alert-circle-outline</v-icon>
                   <h3 class="mr-2 regular text-base text-red-500">
-                    نام کاربری یا رمز عبور شما نادرست است
+                    {{ errorMessage }}
                   </h3>
                 </div>
               </v-expand-transition>
@@ -144,6 +144,7 @@ export default {
       showPassword: false,
       forgetPass: false,
       showError: false,
+      errorMessage: "",
       validForm: true,
       loading: false,
     };
@@ -151,22 +152,23 @@ export default {
   methods: {
     async login() {
       if (this.$refs.validForm.validate()) {
-        this.$router.push("/panel");
-        // this.loading = true;
-        // try {
-        //   const data = await this.$post("users/token/", {
-        //     password: this.password,
-        //     email: this.email,
-        //   });
-        //   console.log(data, "ali");
-        //   this.loading = false;
-        //   this.$store.commit("Auth/setToken", data.data.access);
-        //   this.$router.push("/panel");
-        // } catch (err) {
-        //   this.loading = false;
-        //   this.showError = true;
-        //   console.log(err);
-        // }
+        this.loading = true;
+        try {
+          const data = await this.$post("users/token/", {
+            password: this.password,
+            email: this.email,
+          });
+          console.log(data, "ali");
+          this.loading = false;
+          this.$store.commit("Auth/setToken", data.data.access);
+          this.$router.push("/panel");
+        } catch (err) {
+          this.loading = false;
+          this.errorMessage = "مشکل در ارسال اطلاعات";
+          if (err.response?.status === 401)
+            this.errorMessage = "ایمیل یا رمز عبور وارد شده نادرست است";
+          this.showError = true;
+        }
       }
     },
   },

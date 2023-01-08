@@ -8,31 +8,31 @@
     >
       <loading v-if="loading" />
       <v-row v-else class="mt-4">
-        <v-col cols="12" md="6" lg="3">
+        <v-col cols="12" md="6" lg="3" v-for="(os, i) in osLists" :key="i">
           <div
             class="
               p-3
               border-2 border-primary
               rounded-md
               transition
-              duration-200
+              duration-300
               hover:shadow-2xl
             "
           >
             <div class="w-full h-[150px] d-flex justify-center items-center">
-              <img
-                src="/img/windows.png"
-                alt=""
-                class="max-w-full max-h-[150px]"
-              />
+              <img :src="os.osPhoto" alt="" class="max-w-full max-h-[150px]" />
             </div>
-            <h3 class="font-bold my-2 text-center">windows</h3>
+            <h3 class="font-bold my-2 text-center">{{ os.osDistro }}</h3>
             <v-select
+              :items="os.versions"
+              item-text="version"
+              item-value="id"
               outlined
               label="انتخاب ورژن"
               dense
               hide-details
               no-data-text="داده ای وجود ندارد!"
+              v-model="osSelected"
             ></v-select>
           </div>
         </v-col>
@@ -45,14 +45,15 @@
 export default {
   data() {
     return {
-      items: [
-        { title: "Click Me" },
-        { title: "Click Me" },
-        { title: "Click Me" },
-        { title: "Click Me 2" },
-      ],
+      osSelected: null,
       loading: true,
+      osLists: [],
     };
+  },
+  watch: {
+    osSelected(val) {
+      console.log(val);
+    },
   },
   mounted() {
     this.getAllOs();
@@ -60,8 +61,30 @@ export default {
   methods: {
     async getAllOs() {
       try {
-        const data = await this.$axios.get("/service/image");
-        console.log(data);
+        const data = (await this.$axios.get("/service/image")).data.data;
+
+        let temp = [];
+
+        data.forEach((element) => {
+          const osDistro = element.os_distro;
+          const osPhoto = element.photo;
+          let osVersion = [];
+          data.forEach((item) => {
+            if (item.os_distro === osDistro) {
+              osVersion.push({ id: item.id, version: item.os_version });
+            }
+          });
+          temp.push({
+            osDistro: osDistro,
+            osPhoto: osPhoto,
+            versions: osVersion,
+          });
+        });
+
+        this.osLists = Array.from(new Set(temp.map(JSON.stringify))).map(
+          JSON.parse
+        );
+
         this.loading = false;
       } catch (err) {
         this.loading = false;
@@ -72,5 +95,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+:deep(.v-input input) {
+  cursor: pointer !important;
+}
 </style>

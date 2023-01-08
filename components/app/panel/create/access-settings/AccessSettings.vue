@@ -35,23 +35,32 @@
               >مشاهده لیست کلید ها</v-expansion-panel-header
             >
             <v-expansion-panel-content>
-              <div v-for="i in 4" :key="i">
-                <v-radio-group v-model="radioGroup" hide-details>
+              <div
+                v-if="sshList.length === 0"
+                class="d-flex justify-center items-center w-full min-h-[200px]"
+              >
+                <span class="text-xl"> هنوز کلیدی ثبت نشده است! </span>
+              </div>
+              <v-radio-group v-model="radioGroup" hide-details>
+                <div v-for="sshKey in sshList" :key="sshKey.id">
                   <div class="d-flex justify-between items-center">
-                    <v-radio :label="`Radio ${i}`" :value="i"></v-radio>
+                    <v-radio :label="sshKey.name" :value="sshKey"></v-radio>
                     <v-btn text color="red">
                       <v-icon color="red">mdi-delete</v-icon>
                     </v-btn>
                   </div>
-                </v-radio-group>
-              </div>
+                </div>
+              </v-radio-group>
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
       </div>
     </div>
     <v-dialog max-width="600" v-model="addSshkeyDialog">
-      <add-ssh-key @closeDialog="addSshkeyDialog = false" />
+      <add-ssh-key
+        @closeDialog="addSshkeyDialog = false"
+        @updateList="getSshList"
+      />
     </v-dialog>
   </div>
 </template>
@@ -64,11 +73,24 @@ export default {
     return {
       radioGroup: 1,
       addSshkeyDialog: false,
+      sshList: [],
     };
   },
   watch: {
     radioGroup(val) {
       console.log(val);
+    },
+  },
+  mounted() {
+    this.getSshList();
+  },
+  methods: {
+    async getSshList() {
+      try {
+        this.sshList = (await this.$axios.get("/service/keypair")).data.data;
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
 };
