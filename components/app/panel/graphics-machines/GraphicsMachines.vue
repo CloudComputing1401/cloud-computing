@@ -1,16 +1,6 @@
 <template>
   <div>
-    <div
-      class="
-        d-flex
-        items-center
-        justify-between
-        border border-[#d0d0d0]
-        rounded
-        p-3
-        my-3
-      "
-    >
+    <div class="flex-between border border-[#d0d0d0] rounded p-3 my-3">
       <div class="d-flex items-center">
         <img src="/img/windows.png" alt="" class="w-[50px] h-[50px] ml-2" />
         <span class="py-1 px-4 rounded text-white bg-green-500">فعال</span>

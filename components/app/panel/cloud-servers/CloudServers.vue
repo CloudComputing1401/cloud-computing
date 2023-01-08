@@ -2,7 +2,7 @@
   <div>
     <div
       class="
-        d-flex
+        d-block d-md-flex
         items-center
         justify-between
         border border-[#d0d0d0]
@@ -11,18 +11,34 @@
         my-3
       "
     >
-      <div class="d-flex items-center">
+      <div class="flex-center">
         <img src="/img/windows.png" alt="" class="w-[50px] h-[50px] ml-2" />
         <span class="py-1 px-4 rounded text-white bg-green-500">فعال</span>
       </div>
-      <div>نام سرور ابری</div>
-      <div>192.168.100.170:3000</div>
-      <div>تاریخ ایجاد</div>
+      <div
+        class="
+          w-full
+          sm:w-[85%]
+          md:w-[60%]
+          d-block d-sm-flex
+          items-center
+          justify-between
+          mx-auto
+          my-5 my-md-0
+          text-center
+        "
+      >
+        <div>نام سرور ابری</div>
+        <div class="my-2 sm:my-0">192.168.100.170:3000</div>
+        <div>تاریخ ایجاد</div>
+      </div>
       <v-menu rounded offset-y>
         <template v-slot:activator="{ attrs, on }">
-          <v-btn text v-bind="attrs" v-on="on">
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
+          <div class="w-[70px] mx-auto flex-center">
+            <v-btn text v-bind="attrs" v-on="on">
+              <v-icon>mdi-dots-horizontal</v-icon>
+            </v-btn>
+          </div>
         </template>
 
         <v-list>

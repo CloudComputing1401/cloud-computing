@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-center items-center h-full w-full">
+  <div class="flex-center h-full w-full">
     <div
       class="
         max-w-[1000px]
@@ -142,7 +142,7 @@
               </v-form>
             </div>
           </div>
-          <div class="d-flex justify-center items-center">
+          <div class="flex-center">
             <span class="regular">آیا حساب کاربری دارید؟</span>
             <span
               class="mx-2 bold text-[#060d2d] cursor-pointer"

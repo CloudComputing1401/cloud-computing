@@ -1,6 +1,6 @@
 <template>
   <div class="py-3 min-h-[400px]">
-    <div class="d-flex items-center justify-between mt-5">
+    <div class="flex-between mt-5">
       <div class="d-flex items-center">
         <v-icon color="primary" size="60">mdi-chart-box-outline</v-icon>
         <div class="mr-2">
@@ -25,9 +25,7 @@
         class="
           w-full
           min-h-[200px]
-          d-flex
-          items-center
-          justify-center
+          flex-center
           border border-[#d0d0d0]
           rounded
           p-4
@@ -53,9 +51,7 @@
         class="
           w-full
           min-h-[200px]
-          d-flex
-          items-center
-          justify-center
+          flex-center
           border border-[#d0d0d0]
           rounded
           p-4

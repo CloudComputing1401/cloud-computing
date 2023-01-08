@@ -9,11 +9,7 @@
       </div>
       <div class="my-10">
         <h2 class="regular text-xl font-semibold">انتخاب سیستم عامل</h2>
-        <div
-          :class="[
-            loading ? 'min-h-[200px] d-flex justify-center items-center' : null,
-          ]"
-        >
+        <div :class="[loading ? 'min-h-[200px] flex-center' : null]">
           <loading v-if="loading" />
           <operating-system v-else />
         </div>
@@ -21,11 +17,7 @@
       <v-divider></v-divider>
       <div class="my-10">
         <h2 class="regular text-xl font-semibold">انتخاب مشخصات سیستم</h2>
-        <div
-          :class="[
-            loading ? 'min-h-[200px] d-flex justify-center items-center' : null,
-          ]"
-        >
+        <div :class="[loading ? 'min-h-[200px] flex-center' : null]">
           <loading v-if="loading" />
           <computing-server-operatings v-else />
         </div>

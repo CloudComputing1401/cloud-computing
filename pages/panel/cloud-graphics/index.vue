@@ -20,9 +20,7 @@
         <h2 class="regular text-xl">لیست گرافیک های ابری</h2>
         <div
           :class="[
-            loading || graphicCloudData.length === 0
-              ? 'd-flex justify-center items-center'
-              : null,
+            loading || graphicCloudData.length === 0 ? 'flex-center' : null,
             'min-h-[250px] pt-[20px]',
           ]"
         >

@@ -9,14 +9,12 @@
         <v-col cols="12" sm="4">
           <h4 class="text-lg font-bold">تعداد ماشین ها</h4>
           <div class="d-flex items-center mt-3">
-            <v-btn color="primary" height="60">
+            <v-btn color="primary" height="60" @click="counter++">
               <span class="text-[24px]">+</span>
             </v-btn>
             <div
               class="
-                d-flex
-                justify-center
-                items-center
+                flex-center
                 border-2 border-primary
                 rounded
                 w-[110px]
@@ -26,22 +24,33 @@
                 text-[20px]
               "
             >
-              1
+              {{ counter }}
             </div>
-            <v-btn color="primary">
+            <v-btn color="primary" :disabled="counter <= 1" @click="counter--">
               <span class="text-[24px]">-</span>
             </v-btn>
           </div>
         </v-col>
         <v-col cols="12" sm="5">
           <h4 class="text-lg font-bold">نام ماشین</h4>
-          <v-text-field outlined height="45" label="نام ماشین" class="mt-3" />
+          <v-text-field
+            outlined
+            height="45"
+            label="نام ماشین"
+            v-model="name"
+            :rules="[(v) => !!v || 'وارد کردن نام پروژه الزامی است']"
+            class="mt-3"
+          />
         </v-col>
         <v-col cols="12" sm="3">
           <h4 class="text-lg font-bold">پروژه</h4>
           <v-select
             label="پروژه"
             outlined
+            :items="projectList"
+            item-text="name"
+            item-value="id"
+            :rules="[(v) => !!v || 'انتخاب پروژه الزامی است']"
             no-data-text="پروژه ای یافت نشد"
             class="mt-3"
           />
@@ -52,7 +61,49 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    value: {
+      type: Object,
+      dafault: () => ({ machinNumber: 1 }),
+    },
+  },
+  data: () => ({
+    counter: 1,
+    name: "",
+    project: "",
+    projectList: [],
+  }),
+  watch: {
+    name(val) {
+      const value = this.value;
+      value.machinName = val;
+      this.$emit("input", value);
+    },
+    counter(val) {
+      const value = this.value;
+      value.machinNumber = val;
+      this.$emit("input", value);
+    },
+    project(val) {
+      const value = this.value;
+      value.machinProject = val;
+      this.$emit("input", value);
+    },
+  },
+  mounted() {
+    this.getProjects();
+  },
+  methods: {
+    async getProjects() {
+      try {
+        this.projectList = (await this.$get("service/project")).data;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  },
+};
 </script>
 
 <style>

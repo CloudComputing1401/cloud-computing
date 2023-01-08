@@ -1,14 +1,12 @@
 <template>
   <div>
-    <div class="d-flex items-center justify-between my-[30px]">
+    <div class="flex-between my-[30px]">
       <h2 class="text-[28px] font-bold">ماشین های گرافیکی</h2>
       <v-btn color="primary">گرافیک ابری جدید</v-btn>
     </div>
     <div
       :class="[
-        loading || projectData.length === 0
-          ? 'd-flex justify-center items-center'
-          : null,
+        loading || projectData.length === 0 ? 'flex-center' : null,
         'min-h-[200px]',
       ]"
     >

@@ -1,11 +1,7 @@
 <template>
   <div>
     <h2 class="regular text-xl font-semibold">انتخاب سیستم</h2>
-    <div
-      :class="[
-        loading ? 'min-h-[200px] d-flex justify-center items-center' : null,
-      ]"
-    >
+    <div :class="[loading ? 'min-h-[200px] flex-center' : null]">
       <loading v-if="loading" />
       <v-row v-else class="mt-4">
         <v-col cols="12" md="6" lg="3" v-for="(os, i) in osLists" :key="i">
@@ -19,7 +15,7 @@
               hover:shadow-2xl
             "
           >
-            <div class="w-full h-[150px] d-flex justify-center items-center">
+            <div class="w-full h-[150px] flex-center">
               <img :src="os.osPhoto" alt="" class="max-w-full max-h-[150px]" />
             </div>
             <h3 class="font-bold my-2 text-center">{{ os.osDistro }}</h3>

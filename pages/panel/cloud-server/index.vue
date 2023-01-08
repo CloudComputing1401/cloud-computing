@@ -20,9 +20,7 @@
         <h2 class="regular text-xl">لیست سرور های ابری ایجاد شده</h2>
         <div
           :class="[
-            loading || serverCloudData.length === 0
-              ? 'd-flex justify-center items-center'
-              : null,
+            loading || serverCloudData.length === 0 ? 'flex-center' : null,
             'min-h-[250px] pt-[20px]',
           ]"
         >
