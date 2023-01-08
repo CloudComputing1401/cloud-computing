@@ -158,6 +158,11 @@ export default {
           to: "/panel/volumes",
         },
         {
+          icon: "mdi-wallet",
+          title: "امور مالی",
+          to: "/panel/finance",
+        },
+        {
           icon: "mdi-account",
           title: "پروفایل",
           to: "/panel/profile",

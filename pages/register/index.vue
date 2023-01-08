@@ -16,13 +16,13 @@
             <h1 class="regular text-center text-2xl mt-5 mb-3">
               ثبت نام و تکمیل اطلاعات
             </h1>
-            <div class="w-full h-[80px]">
+            <div class="w-full h-[70px]">
               <v-expand-transition>
                 <div
-                  v-if="errorMessage"
+                  v-if="showError"
                   class="
                     w-full
-                    h-full
+                    h-[60px]
                     border-2 border-red-500
                     rounded-md
                     p-4
@@ -31,8 +31,8 @@
                   "
                 >
                   <v-icon color="red">mdi-alert-circle-outline</v-icon>
-                  <h3 class="mr-2 regular text-lg">
-                    نام کاربری یا رمز عبور شما نادرست است
+                  <h3 class="mr-2 regular text-base text-red-500">
+                    {{ errorMessage }}
                   </h3>
                 </div>
               </v-expand-transition>
@@ -135,6 +135,7 @@
                   color="primary"
                   class="mt-1"
                   :disabled="!validForm"
+                  :loading="loading"
                 >
                   <span class="text-base text-white">ثبت نام</span>
                 </v-btn>
@@ -159,16 +160,18 @@
         </v-col>
       </v-row>
     </div>
+    <snack-bar />
   </div>
 </template>
 
 <script>
-import registerVue from "../../components/app/register/register.vue";
+import SnackBar from "../../components/core/SnackBar/SnackBar.vue";
 export default {
   layout: "login",
   data() {
     return {
-      errorMessage: false,
+      showError: false,
+      errorMessage: "",
       registerData: {
         firstName: "",
         lastName: "",
@@ -177,21 +180,34 @@ export default {
       },
       showPassword: false,
       validForm: true,
+      loading: false,
     };
   },
   methods: {
     async registerHandler() {
       if (this.$refs.validForm.validate()) {
+        this.loading = true;
         try {
-          const data = await this.$axios.post("users/register/", {
+          const data = await this.$post("users/register/", {
             first_name: this.registerData.firstName,
             last_name: this.registerData.lastName,
             password: this.registerData.password,
             email: this.registerData.email,
           });
-          console.log(data, "hossein");
+          this.loading = false;
+          this.$store.dispatch(
+            "SnackBar/show",
+            "ثبت نام شما با موفقیت انجام شد."
+          );
+          setTimeout(() => {
+            this.$router.push("/login");
+          }, 2000);
         } catch (err) {
-          console.log(err);
+          this.loading = false;
+          this.errorMessage = "مشکل در ارسال اطلاعات";
+          if (err.response.status === 400)
+            this.errorMessage = "ایمیل وارد شده تکراری میباشد";
+          this.showError = true;
         }
       }
     },

@@ -60,7 +60,7 @@ export default {
           createdAt: "1401/8/8",
         },
       ];
-    }, 4000);
+    }, 2000);
   },
 };
 </script>

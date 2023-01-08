@@ -7,14 +7,26 @@
       </div>
       <v-row justify="center">
         <v-col cols="12" sm="6">
-          <v-form>
-            <v-text-field label="نام پروژه" outlined />
-            <v-textarea label="توضیحات" outlined />
+          <v-form
+            lazy-validation
+            v-model="validForm"
+            ref="validForm"
+            @submit.prevent="addProject"
+          >
+            <v-text-field
+              v-model="projectName"
+              label="نام پروژه"
+              outlined
+              :rules="[(v) => !!v || 'وارد کردن نام پروژه الزامی است']"
+            />
+            <v-textarea v-model="projectDescription" label="توضیحات" outlined />
             <v-btn
               block
               class="primary"
               height="50"
-              @click="$router.push('/panel/projects/ali')"
+              type="submit"
+              :loading="loading"
+              :disabled="!validForm"
               >ایجاد پروژه</v-btn
             >
           </v-form>
@@ -27,6 +39,29 @@
 <script>
 export default {
   layout: "panel",
+  data: () => ({
+    validForm: true,
+    projectName: "",
+    projectDescription: "",
+    loading: false,
+  }),
+  methods: {
+    async addProject() {
+      if (this.$refs.validForm.validate()) {
+        console.log("hosseinali");
+        try {
+          const data = await this.$post("service/project/", {
+            name: this.projectName,
+            description: this.projectDescription,
+          });
+          console.log(data, "hiiii");
+          this.$router.push(`/panel/projects/${data.data.id}`);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    },
+  },
 };
 </script>
 

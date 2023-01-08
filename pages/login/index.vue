@@ -9,23 +9,24 @@
             <h1 class="regular text-center text-2xl mt-5 mb-3">
               ورود به پنل کاربری
             </h1>
-            <div class="w-full h-[80px]">
+            <div class="w-full h-[70px]">
               <v-expand-transition>
                 <div
-                  v-if="errorMessage"
+                  v-if="showError"
                   class="
                     w-full
-                    h-full
+                    h-[60px]
                     border-2 border-red-500
                     rounded-md
-                    p-4
+                    px-4
+                    py-2
                     d-flex
                     items-center
                   "
                 >
                   <v-icon color="red">mdi-alert-circle-outline</v-icon>
-                  <h3 class="mr-2 regular text-lg">
-                    نام کاربری یا رمز عبور شما نادرست است
+                  <h3 class="mr-2 regular text-base text-red-500">
+                    {{ errorMessage }}
                   </h3>
                 </div>
               </v-expand-transition>
@@ -87,6 +88,7 @@
                       height="50"
                       color="primary"
                       :disabled="!validForm"
+                      :loading="loading"
                     >
                       <span class="text-base text-white">ورود</span>
                     </v-btn>
@@ -141,22 +143,31 @@ export default {
       password: "",
       showPassword: false,
       forgetPass: false,
-      errorMessage: false,
+      showError: false,
+      errorMessage: "",
       validForm: true,
+      loading: false,
     };
   },
   methods: {
     async login() {
       if (this.$refs.validForm.validate()) {
+        this.loading = true;
         try {
-          // const data = await this.$axios.post("users/token/", {
-          //   password: this.password,
-          //   email: this.email,
-          // });
-          // console.log(data, "ali");
+          const data = await this.$post("users/token/", {
+            password: this.password,
+            email: this.email,
+          });
+          console.log(data, "ali");
+          this.loading = false;
+          this.$store.commit("Auth/setToken", data.data.access);
           this.$router.push("/panel");
         } catch (err) {
-          console.log(err);
+          this.loading = false;
+          this.errorMessage = "مشکل در ارسال اطلاعات";
+          if (err.response?.status === 401)
+            this.errorMessage = "ایمیل یا رمز عبور وارد شده نادرست است";
+          this.showError = true;
         }
       }
     },
