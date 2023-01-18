@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <div class="pa-4 my-5 rounded-lg custom-shadow">
+    <div class="pa-4 my-5 rounded-lg shadow-lg bg-white">
       <div class="d-flex items-center">
         <v-icon color="primary" size="75">mdi-nas</v-icon>
         <h1 class="regular text-3xl bold color-primary mr-2">پروژه ها</h1>
@@ -88,7 +88,7 @@ export default {
   methods: {
     async getProjectsData() {
       try {
-        const data = await this.$axios.get("/service/project");
+        const data = await this.$get("service/project");
         console.log(data);
         this.projectData = data.data;
         this.loading = false;
@@ -101,5 +101,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

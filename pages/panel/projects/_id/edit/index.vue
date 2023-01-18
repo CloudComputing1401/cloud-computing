@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <div class="pa-4 my-5 rounded-lg custom-shadow">
+    <div class="pa-4 my-5 rounded-lg shadow-lg bg-white">
       <div class="text-center mb-5">
         <v-icon color="primary" size="75">mdi-content-save-edit-outline</v-icon>
         <h1 class="font-weight-bold mt-3 text-2xl">ویرایش پروژه</h1>
@@ -30,5 +30,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

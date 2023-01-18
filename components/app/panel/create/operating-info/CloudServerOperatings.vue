@@ -21,15 +21,7 @@
                 lg="3"
               >
                 <div
-                  class="
-                    text-center
-                    rounded-lg
-                    border-2 border-primary
-                    select-none
-                    cursor-pointer
-                    duration-300
-                    hover:translate-y-[-8px] hover:shadow-2xl
-                  "
+                  class="text-center rounded-lg border-2 border-primary select-none cursor-pointer duration-300 hover:translate-y-[-8px] hover:shadow-2xl"
                 >
                   <div class="bg-primary py-3 text-white">
                     <h1 class="text-xl">{{ operatingInfo.name }}</h1>
@@ -96,7 +88,7 @@ export default {
     async getAllOsInfo() {
       try {
         this.operatingSystemsData = (
-          await this.$axios.get("/service/flavor")
+          await this.$get("service/flavor", {})
         ).data.data;
         console.log(this.operatingSystemsData, "hi");
         this.loading = false;
@@ -109,5 +101,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

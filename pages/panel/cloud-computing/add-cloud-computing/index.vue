@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <div class="pa-4 my-5 rounded-lg custom-shadow">
+    <div class="pa-4 my-5 rounded-lg shadow-lg bg-white">
       <div class="d-flex items-center">
         <v-icon color="primary" size="75">mdi-cloud-percent</v-icon>
         <h1 class="regular text-3xl bold color-primary mr-2">
@@ -43,8 +43,8 @@
     </div>
   </v-container>
 </template>
-  
-  <script>
+
+<script>
 import OperatingSystem from "@/components/app/panel/create/operating-system/OperatingSystem.vue";
 import OperatingSoftware from "@/components/app/panel/create/operating-software/OperatingSoftware.vue";
 import AdvancedSettings from "@/components/app/panel/create/advanced-settings/AdvancedSettings.vue";
@@ -75,6 +75,5 @@ export default {
   },
 };
 </script>
-  
-  <style>
-</style>
+
+<style></style>

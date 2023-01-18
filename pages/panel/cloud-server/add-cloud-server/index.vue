@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <div class="pa-4 my-5 rounded-lg custom-shadow">
+    <div class="pa-4 my-5 rounded-lg shadow-lg bg-white">
       <v-form
         v-model="validForm"
         ref="validForm"
@@ -95,5 +95,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
