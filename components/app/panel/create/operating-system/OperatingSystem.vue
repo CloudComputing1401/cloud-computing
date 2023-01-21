@@ -6,14 +6,7 @@
       <v-row v-else class="mt-4">
         <v-col cols="12" md="6" lg="3" v-for="(os, i) in osLists" :key="i">
           <div
-            class="
-              p-3
-              border-2 border-primary
-              rounded-md
-              transition
-              duration-300
-              hover:shadow-2xl
-            "
+            class="p-3 border-2 border-primary rounded-md transition duration-300 hover:shadow-2xl"
           >
             <div class="w-full h-[150px] flex-center">
               <img :src="os.osPhoto" alt="" class="max-w-full max-h-[150px]" />
@@ -57,7 +50,7 @@ export default {
   methods: {
     async getAllOs() {
       try {
-        const data = (await this.$axios.get("/service/image")).data.data;
+        const data = (await this.$get("service/image")).data.data;
 
         let temp = [];
 

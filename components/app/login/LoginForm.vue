@@ -79,6 +79,7 @@ export default {
               email: this.email,
             })
           ).data;
+          console.log(data, "all data");
           this.loading = false;
           await this.$store.commit("Auth/setToken", data.token);
           this.$axios.setHeader(

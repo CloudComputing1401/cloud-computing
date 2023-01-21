@@ -19,7 +19,7 @@
         <h2 class="regular text-xl font-semibold">انتخاب مشخصات سیستم</h2>
         <div :class="[loading ? 'min-h-[200px] flex-center' : null]">
           <loading v-if="loading" />
-          <computing-server-operatings v-else />
+          <computing-server-info v-else />
         </div>
       </div>
       <v-divider></v-divider>
@@ -50,7 +50,7 @@ import OperatingSoftware from "@/components/app/panel/create/operating-software/
 import AdvancedSettings from "@/components/app/panel/create/advanced-settings/AdvancedSettings.vue";
 import AccessSettings from "@/components/app/panel/create/access-settings/AccessSettings.vue";
 import MachinInfo from "@/components/app/panel/create/machin-info/MachinInfo.vue";
-import ComputingServerOperatings from "@/components/app/panel/create/operating-info/ComputingServerOperatings.vue";
+import ComputingServerInfo from "@/components/app/panel/create/operating-info/ComputingServerInfo.vue";
 
 export default {
   components: {
@@ -59,7 +59,7 @@ export default {
     AdvancedSettings,
     AccessSettings,
     MachinInfo,
-    ComputingServerOperatings,
+    ComputingServerInfo,
   },
   layout: "panel",
 

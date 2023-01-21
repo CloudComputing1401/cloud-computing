@@ -87,7 +87,7 @@ export default {
   methods: {
     async getSshList() {
       try {
-        this.sshList = (await this.$axios.get("/service/keypair")).data.data;
+        this.sshList = (await this.$get("service/keypair")).data.data;
       } catch (err) {
         console.log(err);
       }
@@ -96,5 +96,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
