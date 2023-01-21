@@ -4,15 +4,7 @@
       <div class="w-full d-flex justify-between">
         <div
           v-ripple
-          class="
-            p-1
-            w-[50px]
-            h-[50px]
-            flex-center
-            border border-[#060d2d]
-            rounded-md
-            cursor-pointer
-          "
+          class="p-1 w-[50px] h-[50px] flex-center border border-[#060d2d] rounded-md cursor-pointer"
           @click.stop="drawer = !drawer"
         >
           <v-icon color="#060d2d">mdi-menu</v-icon>
@@ -30,21 +22,13 @@
         >
           <template v-slot:activator="{ on, attrs }">
             <div
-              class="
-                p-1
-                w-[50px]
-                h-[50px]
-                lg:w-auto
-                flex-center
-                border border-[#060d2d]
-                rounded-md
-              "
+              class="p-1 w-[50px] h-[50px] lg:w-auto flex-center border border-[#060d2d] rounded-md"
               v-bind="attrs"
               v-on="on"
             >
               <template v-if="$vuetify.breakpoint.mdAndUp">
                 <v-icon size="30">mdi-account-circle</v-icon>
-                <span class="regular mx-2">حسینعلی</span>
+                <span class="regular mx-2"> {{ userFullName }} </span>
                 <v-icon size="30">mdi-chevron-down</v-icon>
               </template>
               <template v-else>
@@ -65,9 +49,13 @@
                 >پروفایل</v-list-item-title
               >
             </v-list-item>
-            <v-list-item class="m-2 px-2 regular rounded-md" link>
+            <v-list-item
+              link
+              class="m-2 px-2 regular rounded-md"
+              @click="logOut"
+            >
               <v-list-item-icon class="ml-3">
-                <v-icon>mdi-close</v-icon>
+                <v-icon>mdi-logout</v-icon>
               </v-list-item-icon>
               <v-list-item-title class="text-[#060d2d]">خروج</v-list-item-title>
             </v-list-item>
@@ -92,6 +80,11 @@
           exact-active-class="bg-white text-[#0b052b]"
           :to="item.to"
           class="m-2 px-2 regular rounded-md"
+          :class="`${
+            !$store.getters['User/getActiveUser']
+              ? 'pointer-events-none opacity-50'
+              : ''
+          }`"
         >
           <v-list-item-icon class="ml-4 my-0 align-self-center">
             <v-icon color="white"> {{ item.icon }} </v-icon>
@@ -107,7 +100,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-main>
-      <div>
+      <div class="h-full bg-[#f2f2f2]">
         <v-expand-transition>
           <Nuxt />
         </v-expand-transition>
@@ -121,6 +114,7 @@ export default {
   name: "DefaultLayout",
   data() {
     return {
+      userFullName: "",
       drawer: true,
       menuItems: [
         {
@@ -158,14 +152,17 @@ export default {
           title: "امور مالی",
           to: "/panel/finance",
         },
-        {
-          icon: "mdi-account",
-          title: "پروفایل",
-          to: "/panel/profile",
-        },
+        // {
+        //   icon: "mdi-account",
+        //   title: "پروفایل",
+        //   to: "/panel/profile",
+        // },
       ],
       menu: false,
     };
+  },
+  mounted() {
+    this.userFullName = `${this.$store.getters["User/getUserFirstName"]} ${this.$store.getters["User/getUserLastName"]}`;
   },
   methods: {
     logOut() {

@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <div class="pa-4 my-5 rounded-lg custom-shadow">
+    <div class="pa-4 my-5 rounded-lg shadow-lg bg-white">
       <div class="d-flex items-center">
         <v-icon color="primary" size="75">mdi-cloud-percent</v-icon>
         <h1 class="regular text-3xl bold color-primary mr-2">
@@ -19,7 +19,7 @@
         <h2 class="regular text-xl font-semibold">انتخاب مشخصات سیستم</h2>
         <div :class="[loading ? 'min-h-[200px] flex-center' : null]">
           <loading v-if="loading" />
-          <computing-server-operatings v-else />
+          <computing-server-info v-else />
         </div>
       </div>
       <v-divider></v-divider>
@@ -43,14 +43,14 @@
     </div>
   </v-container>
 </template>
-  
-  <script>
+
+<script>
 import OperatingSystem from "@/components/app/panel/create/operating-system/OperatingSystem.vue";
 import OperatingSoftware from "@/components/app/panel/create/operating-software/OperatingSoftware.vue";
 import AdvancedSettings from "@/components/app/panel/create/advanced-settings/AdvancedSettings.vue";
 import AccessSettings from "@/components/app/panel/create/access-settings/AccessSettings.vue";
 import MachinInfo from "@/components/app/panel/create/machin-info/MachinInfo.vue";
-import ComputingServerOperatings from "@/components/app/panel/create/operating-info/ComputingServerOperatings.vue";
+import ComputingServerInfo from "@/components/app/panel/create/operating-info/ComputingServerInfo.vue";
 
 export default {
   components: {
@@ -59,7 +59,7 @@ export default {
     AdvancedSettings,
     AccessSettings,
     MachinInfo,
-    ComputingServerOperatings,
+    ComputingServerInfo,
   },
   layout: "panel",
 
@@ -75,6 +75,5 @@ export default {
   },
 };
 </script>
-  
-  <style>
-</style>
+
+<style></style>

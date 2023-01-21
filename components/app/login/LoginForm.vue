@@ -73,13 +73,22 @@ export default {
       if (this.$refs.validForm.validate()) {
         this.loading = true;
         try {
-          const data = await this.$post("users/token/", {
-            password: this.password,
-            email: this.email,
-          });
-          console.log(data, "ali");
+          const data = (
+            await this.$post("users/login/", {
+              password: this.password,
+              email: this.email,
+            })
+          ).data;
+          console.log(data, "all data");
           this.loading = false;
-          this.$store.commit("Auth/setToken", data.data.access);
+          await this.$store.commit("Auth/setToken", data.token);
+          this.$axios.setHeader(
+            "Authorization",
+            this.$store.getters["Auth/getToken"]
+          );
+          this.$store.commit("User/setActiveUser", data.has_access);
+          this.$store.commit("User/setUserFirstName", data.first_name);
+          this.$store.commit("User/setUserLastName", data.last_name);
           this.$router.push("/panel");
         } catch (err) {
           this.loading = false;
@@ -93,5 +102,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

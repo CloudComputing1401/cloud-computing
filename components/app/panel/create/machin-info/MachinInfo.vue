@@ -13,16 +13,7 @@
               <span class="text-[24px]">+</span>
             </v-btn>
             <div
-              class="
-                flex-center
-                border-2 border-primary
-                rounded
-                w-[110px]
-                h-[55px]
-                mx-2
-                select-none
-                text-[20px]
-              "
+              class="flex-center border-2 border-primary rounded w-[110px] h-[55px] mx-2 select-none text-[20px]"
             >
               {{ counter }}
             </div>
@@ -45,6 +36,7 @@
         <v-col cols="12" sm="3">
           <h4 class="text-lg font-bold">پروژه</h4>
           <v-select
+            v-model="project"
             label="پروژه"
             outlined
             :items="projectList"
@@ -69,7 +61,7 @@ export default {
     },
   },
   data: () => ({
-    counter: 1,
+    counter: 0,
     name: "",
     project: "",
     projectList: [],
@@ -92,12 +84,14 @@ export default {
     },
   },
   mounted() {
+    this.counter = 1;
     this.getProjects();
   },
   methods: {
     async getProjects() {
       try {
         this.projectList = (await this.$get("service/project")).data;
+        // const data = await this.$get("service/project");
       } catch (err) {
         console.log(err);
       }
@@ -106,5 +100,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

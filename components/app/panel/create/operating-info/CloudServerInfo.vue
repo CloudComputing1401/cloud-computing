@@ -21,15 +21,9 @@
                 lg="3"
               >
                 <div
-                  class="
-                    text-center
-                    rounded-lg
-                    border-2 border-primary
-                    select-none
-                    cursor-pointer
-                    duration-300
-                    hover:translate-y-[-8px] hover:shadow-2xl
-                  "
+                  class="text-center rounded-lg border-2 border-primary select-none cursor-pointer duration-300 hover:translate-y-[-8px] hover:shadow-2xl"
+                  :class="operatingInfo.serverSelected ? 'selected-box' : null"
+                  @click="serverSelected(operatingInfo.id)"
                 >
                   <div class="bg-primary py-3 text-white">
                     <h1 class="text-xl">{{ operatingInfo.name }}</h1>
@@ -87,6 +81,7 @@ export default {
       tab: null,
       loading: true,
       operatingSystemsData: [],
+      selectedBox: false,
     };
   },
   mounted() {
@@ -96,8 +91,12 @@ export default {
     async getAllOsInfo() {
       try {
         this.operatingSystemsData = (
-          await this.$axios.get("/service/flavor")
+          await this.$get("service/flavor", {})
         ).data.data;
+
+        this.operatingSystemsData.forEach((element) => {
+          element["serverSelected"] = false;
+        });
         console.log(this.operatingSystemsData, "hi");
         this.loading = false;
       } catch (err) {
@@ -105,9 +104,19 @@ export default {
         console.log(err);
       }
     },
+    serverSelected(id) {
+      this.operatingSystemsData.forEach((element) => {
+        if (element.id === id) element["serverSelected"] = true;
+        else element["serverSelected"] = false;
+      });
+      console.log(this.operatingSystemsData, "sdflsdfkj");
+    },
   },
 };
 </script>
 
-<style>
+<style scoped>
+.selected-box {
+  background-color: rebeccapurple !important;
+}
 </style>

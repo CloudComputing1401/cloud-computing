@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <div class="pa-4 my-5 rounded-lg custom-shadow">
+    <div class="pa-4 my-5 rounded-lg shadow-lg bg-white">
       <v-form
         v-model="validForm"
         ref="validForm"
@@ -18,7 +18,7 @@
         </div>
         <v-divider></v-divider>
         <div class="my-10">
-          <cloud-server-operatings />
+          <cloud-server-info />
         </div>
         <v-divider></v-divider>
         <div class="my-10">
@@ -56,7 +56,7 @@ import OperatingSoftware from "@/components/app/panel/create/operating-software/
 import AdvancedSettings from "@/components/app/panel/create/advanced-settings/AdvancedSettings.vue";
 import AccessSettings from "@/components/app/panel/create/access-settings/AccessSettings.vue";
 import MachinInfo from "@/components/app/panel/create/machin-info/MachinInfo.vue";
-import CloudServerOperatings from "@/components/app/panel/create/operating-info/CloudServerOperatings.vue";
+import CloudServerInfo from "@/components/app/panel/create/operating-info/CloudServerInfo.vue";
 
 export default {
   components: {
@@ -65,7 +65,7 @@ export default {
     AdvancedSettings,
     AccessSettings,
     MachinInfo,
-    CloudServerOperatings,
+    CloudServerInfo,
   },
   layout: "panel",
 
@@ -88,12 +88,11 @@ export default {
   methods: {
     createServer() {
       if (this.$refs.validForm.validate()) {
-        console.log("ali");
+        console.log("ali", this.machinInfoData);
       }
     },
   },
 };
 </script>
 
-<style>
-</style>
+<style></style>
