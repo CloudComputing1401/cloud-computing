@@ -1,14 +1,7 @@
 <template>
   <div class="flex-center h-full w-full">
     <div
-      class="
-        max-w-[1000px]
-        min-h-[600px]
-        bg-white
-        custom-shadow
-        rounded-[20px]
-        m-5
-      "
+      class="max-w-[1000px] min-h-[600px] bg-white custom-shadow rounded-[20px] m-5"
     >
       <v-row>
         <v-col cols="12" md="5" class="pl-md-0">
@@ -20,15 +13,7 @@
               <v-expand-transition>
                 <div
                   v-if="showError"
-                  class="
-                    w-full
-                    h-[60px]
-                    border-2 border-red-500
-                    rounded-md
-                    p-4
-                    d-flex
-                    items-center
-                  "
+                  class="w-full h-[60px] border-2 border-red-500 rounded-md p-4 d-flex items-center"
                 >
                   <v-icon color="red">mdi-alert-circle-outline</v-icon>
                   <h3 class="mr-2 regular text-base text-red-500">
@@ -188,7 +173,7 @@ export default {
       if (this.$refs.validForm.validate()) {
         this.loading = true;
         try {
-          const data = await this.$post("users/register/", {
+          const data = await this.$axios.post("users/register/", {
             first_name: this.registerData.firstName,
             last_name: this.registerData.lastName,
             password: this.registerData.password,

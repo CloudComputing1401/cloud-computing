@@ -16,7 +16,7 @@
         </template>
 
         <v-list>
-          <v-list-item link :to="`/panel/projects/${id}/instances/ali`">
+          <v-list-item link :to="`/panel/projects/${id}/instances/vmid`">
             <v-list-item-title>مشاهده جزئیات</v-list-item-title>
           </v-list-item>
           <v-list-item link>
@@ -47,5 +47,4 @@
 export default {};
 </script>
 
-<style>
-</style>
+<style></style>

@@ -166,6 +166,11 @@ export default {
   },
   methods: {
     logOut() {
+      this.$store.commit("Auth/clear");
+      this.$axios.setHeader(
+        "Authorization",
+        this.$store.getters["Auth/getToken"]
+      );
       this.$router.push("/");
     },
   },

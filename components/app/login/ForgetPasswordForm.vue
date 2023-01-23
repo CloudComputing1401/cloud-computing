@@ -35,18 +35,7 @@
     </v-form>
     <div
       v-ripple
-      class="
-        w-full
-        h-[50px]
-        flex-center
-        bg-[#E0E0E0]
-        rounded-md
-        mt-3
-        text-black
-        regular
-        select-none
-        cursor-pointer
-      "
+      class="w-full h-[50px] flex-center bg-[#E0E0E0] rounded-md mt-3 text-black regular select-none cursor-pointer"
       @click="$emit('backToLogin')"
     >
       جهت ورود کلیک کنید
@@ -64,12 +53,11 @@ export default {
   methods: {
     sendEmail() {
       if (this.$refs.validForm.validate()) {
-        console.log("hosseinali");
+        console.log("verify email");
       }
     },
   },
 };
 </script>
 
-<style>
-</style>
+<style></style>

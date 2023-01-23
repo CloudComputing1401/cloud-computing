@@ -69,17 +69,17 @@ export default {
   watch: {
     name(val) {
       const value = this.value;
-      value.machinName = val;
+      value.vmName = val;
       this.$emit("input", value);
     },
     counter(val) {
       const value = this.value;
-      value.machinNumber = val;
+      value.vmNumber = val;
       this.$emit("input", value);
     },
     project(val) {
       const value = this.value;
-      value.machinProject = val;
+      value.projectId = val;
       this.$emit("input", value);
     },
   },
