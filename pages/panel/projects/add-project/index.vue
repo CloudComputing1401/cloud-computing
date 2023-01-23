@@ -48,13 +48,11 @@ export default {
   methods: {
     async addProject() {
       if (this.$refs.validForm.validate()) {
-        console.log("hosseinali");
         try {
           const data = await this.$post("service/project/", {
             name: this.projectName,
             description: this.projectDescription,
           });
-          console.log(data, "hiiii");
           this.$router.push(`/panel/projects/${data.data.id}`);
         } catch (err) {
           console.log(err);

@@ -62,7 +62,6 @@ export default {
             name: this.sshName,
             public_key: this.sshKey,
           });
-          console.log(data);
           this.loading = false;
           this.$emit("updateList");
           this.$store.dispatch("SnackBar/show", "کلید با موفقیت افزوده شد.");
@@ -82,5 +81,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

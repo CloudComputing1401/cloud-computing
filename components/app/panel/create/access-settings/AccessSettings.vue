@@ -16,7 +16,7 @@
           <div>
             با فعال کردن این قسمت یک رمز عبور تصادفی به ایمیل شما ارسال می شود.
           </div>
-          <v-switch inset></v-switch>
+          <v-switch inset v-model="activePassword"></v-switch>
         </div>
       </div>
       <div class="custom-shadow p-4 rounded mt-10">
@@ -41,7 +41,11 @@
               >
                 <span class="text-xl"> هنوز کلیدی ثبت نشده است! </span>
               </div>
-              <v-radio-group v-model="radioGroup" hide-details>
+              <v-radio-group
+                v-model="keyPairSelected"
+                hide-details
+                :disabled="activePassword"
+              >
                 <div v-for="sshKey in sshList" :key="sshKey.id">
                   <div class="d-flex justify-between items-center">
                     <v-radio :label="sshKey.name" :value="sshKey"></v-radio>
@@ -68,17 +72,31 @@
 <script>
 import AddSshKey from "./add-ssh-key/AddSshKey.vue";
 export default {
+  props: {
+    value: {
+      type: Object,
+      dafault: () => ({ activePassword: false }),
+    },
+  },
   components: { AddSshKey },
   data() {
     return {
-      radioGroup: 1,
+      keyPairSelected: null,
+      activePassword: false,
       addSshkeyDialog: false,
       sshList: [],
     };
   },
   watch: {
-    radioGroup(val) {
-      console.log(val);
+    keyPairSelected(val) {
+      const value = this.value;
+      value.keyPairId = val.id;
+      this.$emit("input", value);
+    },
+    activePassword(val) {
+      const value = this.value;
+      value.activePassword = val;
+      this.$emit("input", value);
     },
   },
   mounted() {

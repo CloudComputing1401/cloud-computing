@@ -14,11 +14,11 @@
           </h1>
         </div>
         <div class="my-10">
-          <operating-system />
+          <operating-system v-model="operatingSystemData" />
         </div>
         <v-divider></v-divider>
         <div class="my-10">
-          <cloud-server-info />
+          <cloud-server-info v-model="flavorData" />
         </div>
         <v-divider></v-divider>
         <div class="my-10">
@@ -30,18 +30,32 @@
         </div>
         <v-divider></v-divider>
         <div class="my-10">
-          <access-settings />
+          <access-settings v-model="accessSettingData" />
         </div>
         <div class="my-10">
-          <machin-info v-model="machinInfoData" />
+          <machin-info v-model="vmInfo" />
         </div>
+        <v-expand-transition>
+          <div v-if="errors.length > 0">
+            <div
+              v-for="(error, index) in errors"
+              :key="index"
+              class="d-flex items-center p-4 rounded-md border border-red-500 bg-red-100 mb-4"
+            >
+              <v-icon color="red" class="ml-2">mdi-alert-circle</v-icon>
+              <span class="text-red-500">
+                {{ error }}
+              </span>
+            </div>
+          </div>
+        </v-expand-transition>
         <div class="w-full">
           <v-btn
             height="55"
             block
             color="primary"
             @click="createServer"
-            :disabled="!validForm"
+            :loading="loading"
             >ایجاد سرور ابری</v-btn
           >
         </div>
@@ -71,24 +85,57 @@ export default {
 
   data() {
     return {
-      loading: true,
+      loading: false,
       validForm: true,
-      machinInfoData: {
-        machinNumber: null,
-        machinName: "",
-        machinProject: "",
+      vmInfo: {
+        vmNumber: null,
+        vmName: "",
+        projectId: "",
       },
+      accessSettingData: {
+        activePassword: false,
+        keyPairId: null,
+      },
+      flavorData: {
+        flavorId: null,
+      },
+      operatingSystemData: {
+        operatingSystemId: null,
+      },
+      errors: [],
     };
   },
-  mounted() {
-    setTimeout(() => {
-      this.loading = false;
-    }, 3000);
-  },
   methods: {
-    createServer() {
-      if (this.$refs.validForm.validate()) {
-        console.log("ali", this.machinInfoData);
+    async createServer() {
+      this.errors = [];
+      if (this.operatingSystemData.operatingSystemId === null) {
+        this.errors.push("انتخاب سیستم عامل الزامی است");
+      }
+      if (this.flavorData.flavorId === null) {
+        this.errors.push("انتخاب مشخصات ماشین الزامی است");
+      }
+      if (
+        !this.accessSettingData.activePassword &&
+        this.accessSettingData.keyPairId === null
+      ) {
+        this.errors.push("انتخاب کلید الزامی است");
+      }
+      if (this.$refs.validForm.validate() && this.errors.length === 0) {
+        this.loading = true;
+        try {
+          const data = await this.$post("service/vm/", {
+            project_id: this.vmInfo.projectId,
+            image_id: this.operatingSystemData.operatingSystemId,
+            name: this.vmInfo.vmName,
+            flavor_id: this.flavorData.flavorId,
+            keypair_id: this.accessSettingData.keyPairId,
+          });
+          console.log(data);
+          this.loading = false;
+        } catch (err) {
+          this.loading = false;
+          console.log(err);
+        }
       }
     },
   },

@@ -89,7 +89,6 @@ export default {
     async getProjectsData() {
       try {
         const data = await this.$get("service/project");
-        console.log(data);
         this.projectData = data.data;
         this.loading = false;
       } catch (err) {

@@ -32,6 +32,11 @@
 
 <script>
 export default {
+  props: {
+    value: {
+      type: Object,
+    },
+  },
   data() {
     return {
       osSelected: null,
@@ -41,7 +46,9 @@ export default {
   },
   watch: {
     osSelected(val) {
-      console.log(val);
+      const value = this.value;
+      value.operatingSystemId = val;
+      this.$emit("input", value);
     },
   },
   mounted() {
