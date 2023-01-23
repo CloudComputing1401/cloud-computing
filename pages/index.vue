@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-center items-center h-full w-full">
+  <div class="flex-center h-full w-full">
     <div class="w-[600px] bg-white rounded-lg shadow-md p-5">
       <h1 class="regular text-4xl text-center my-10">
         ارائه خدمات ابری دانشگاه کاشان
