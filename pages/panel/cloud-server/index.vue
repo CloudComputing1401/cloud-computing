@@ -20,14 +20,18 @@
         <h2 class="regular text-xl">لیست سرور های ابری ایجاد شده</h2>
         <div
           :class="[
-            loading || serverCloudData.length === 0 ? 'flex-center' : null,
+            loading || serversData.length === 0 ? 'flex-center' : null,
             'min-h-[250px] pt-[20px]',
           ]"
         >
           <loading v-if="loading" />
           <template v-if="!loading">
-            <cloud-servers v-for="(i, index) in serverCloudData" :key="index" />
-            <div v-if="serverCloudData.length === 0">
+            <cloud-servers
+              v-for="server in serversData"
+              :key="server.id"
+              :serverData="server"
+            />
+            <div v-if="serversData.length === 0">
               <h1 class="regular text-xl">سرور ابری یافت نشد!</h1>
             </div>
           </template>
@@ -45,14 +49,22 @@ export default {
   components: { CloudServers },
   data() {
     return {
-      serverCloudData: ["ali"],
+      serversData: [],
       loading: true,
     };
   },
   mounted() {
-    setTimeout(() => {
-      this.loading = false;
-    }, 2000);
+    this.getServerClouds();
+  },
+  methods: {
+    async getServerClouds() {
+      try {
+        this.serversData = (await this.$get("service/vm/")).data.data;
+        this.loading = false;
+      } catch (err) {
+        this.loading = false;
+      }
+    },
   },
 };
 </script>

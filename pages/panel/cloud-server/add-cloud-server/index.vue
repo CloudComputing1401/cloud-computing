@@ -61,6 +61,7 @@
         </div>
       </v-form>
     </div>
+    <snack-bar />
   </v-container>
 </template>
 
@@ -127,11 +128,13 @@ export default {
             project_id: this.vmInfo.projectId,
             image_id: this.operatingSystemData.operatingSystemId,
             name: this.vmInfo.vmName,
-            flavor_id: this.flavorData.flavorId,
+            flavor_id: Number(this.flavorData.flavorId),
             keypair_id: this.accessSettingData.keyPairId,
           });
-          console.log(data);
           this.loading = false;
+          this.$store.dispatch("SnackBar/show", "ماشین با موفقیت ایجاد شد.");
+          await new Promise((resolve) => setTimeout(resolve, 2500));
+          this.$router.push("/panel/cloud-server");
         } catch (err) {
           this.loading = false;
           console.log(err);
