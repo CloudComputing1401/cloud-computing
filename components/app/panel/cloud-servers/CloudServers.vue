@@ -4,15 +4,19 @@
       class="d-block d-md-flex items-center justify-between border border-[#d0d0d0] rounded p-3 my-3"
     >
       <div class="flex-center">
-        <img src="/img/windows.png" alt="" class="w-[50px] h-[50px] ml-2" />
+        <img
+          :src="serverData.image.photo"
+          alt=""
+          class="w-[50px] h-[50px] ml-2"
+        />
         <span class="py-1 px-4 rounded text-white bg-green-500">فعال</span>
       </div>
       <div
         class="w-full sm:w-[85%] md:w-[60%] d-block d-sm-flex items-center justify-between mx-auto my-5 my-md-0 text-center"
       >
-        <div>نام سرور ابری</div>
+        <div class="font-semibold">{{ serverData.name }}</div>
         <div class="my-2 sm:my-0">192.168.100.170:3000</div>
-        <div>تاریخ ایجاد</div>
+        <div>{{ createdAt }}</div>
       </div>
       <v-menu rounded offset-y>
         <template v-slot:activator="{ attrs, on }">
@@ -24,7 +28,10 @@
         </template>
 
         <v-list>
-          <v-list-item link :to="`/panel/projects/${id}/instances/vmid`">
+          <v-list-item
+            link
+            :to="`/panel/projects/${serverData.project_id}/instances/${serverData.id}`"
+          >
             <v-list-item-title>مشاهده جزئیات</v-list-item-title>
           </v-list-item>
           <v-list-item link>
@@ -52,14 +59,23 @@
 </template>
 
 <script>
+import moment from "moment-jalaali";
 export default {
   props: {
-    data: Object,
+    serverData: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
       id: 5,
     };
+  },
+  computed: {
+    createdAt() {
+      return moment(this.serverData.created).format("HH:mm - jYYYY/jMM/jDD");
+    },
   },
 };
 </script>
