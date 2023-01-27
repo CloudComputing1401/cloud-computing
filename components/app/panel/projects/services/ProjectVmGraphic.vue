@@ -27,7 +27,7 @@ export default {
   components: { GraphicsMachines },
   data() {
     return {
-      projectData: ["ali", "ali"],
+      projectData: ["vm1", "vm2"],
       loading: true,
     };
   },
@@ -39,5 +39,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

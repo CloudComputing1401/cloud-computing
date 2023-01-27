@@ -49,6 +49,7 @@ export default {
     return {
       projectData: [],
       loading: true,
+      id: 213213,
     };
   },
   mounted() {

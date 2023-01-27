@@ -44,7 +44,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data: () => ({
+    id: 213213,
+  }),
+};
 </script>
 
 <style></style>
