@@ -27,7 +27,7 @@ export default {
   components: { CloudServers },
   data() {
     return {
-      projectData: ["ali", "ali"],
+      projectData: [],
       loading: true,
     };
   },
@@ -39,5 +39,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

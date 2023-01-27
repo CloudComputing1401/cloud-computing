@@ -7,7 +7,7 @@
       <project-heavy-computing />
     </div>
     <div>
-      <project-graphic-machin />
+      <project-vm-graphic />
     </div>
     <div>
       <project-hard-disk />
@@ -17,18 +17,17 @@
 
 <script>
 import ProjectCloudServer from "./ProjectCloudServer.vue";
-import ProjectGraphicMachin from "./ProjectGraphicMachin.vue";
+import ProjectVmGraphic from "./ProjectVmGraphic.vue";
 import ProjectHardDisk from "./ProjectHardDisk.vue";
 import ProjectHeavyComputing from "./ProjectHeavyComputing.vue";
 export default {
   components: {
     ProjectCloudServer,
     ProjectHeavyComputing,
-    ProjectGraphicMachin,
+    ProjectVmGraphic,
     ProjectHardDisk,
   },
 };
 </script>
 
-<style>
-</style>
+<style></style>
