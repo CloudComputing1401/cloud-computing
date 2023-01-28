@@ -39,7 +39,9 @@
         @click="addSshKey"
         >تایید</v-btn
       >
-      <v-btn color="primary" outlined width="100">انصراف</v-btn>
+      <v-btn color="primary" outlined width="100" @click="$emit('closeDialog')"
+        >انصراف</v-btn
+      >
     </div>
     <snack-bar />
   </div>

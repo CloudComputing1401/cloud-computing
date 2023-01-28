@@ -47,7 +47,7 @@ export default {
   layout: "panel",
   data() {
     return {
-      graphicCloudData: ["ali"],
+      graphicCloudData: [],
       loading: true,
     };
   },

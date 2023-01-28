@@ -91,7 +91,7 @@ export default {
           this.$router.push("/panel");
         } catch (err) {
           this.loading = false;
-          if (err.response?.status === 401)
+          if (err.response?.status === 403)
             this.$emit("error", "ایمیل یا رمز عبور وارد شده نادرست است");
           else this.$emit("error", "مشکل در ارسال اطلاعات");
         }
