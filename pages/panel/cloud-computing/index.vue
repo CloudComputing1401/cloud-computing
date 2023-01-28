@@ -49,7 +49,7 @@ export default {
   },
   data() {
     return {
-      cloudComputingData: ["ali"],
+      cloudComputingData: [],
       loading: true,
     };
   },
