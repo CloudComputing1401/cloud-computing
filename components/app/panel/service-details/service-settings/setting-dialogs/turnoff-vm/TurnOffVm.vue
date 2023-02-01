@@ -6,10 +6,7 @@
           >mdi-close</v-icon
         >
       </div>
-      <h1 class="text-[24px] font-bold my-4 text-center">
-        خاموش کردن
-        {{ machineData.name }}
-      </h1>
+      <h1 class="text-[24px] font-bold my-4 text-center">خاموش کردن سرور</h1>
       <div class="mb-5 text-justify">
         خاموش کردن سرور ابری از این طریق همانند قطع کردن اتصال برق است (پیشنهاد
         ما به شما خاموش کردن از طریق کنسول است).
@@ -40,7 +37,7 @@ export default {
       (state, getters) => getters["Dialog/active"],
       (newValue) => {
         this.turnOffMachineDialog = newValue === "TurnOffMachineDialog";
-        this.machineData = this.$store.getters["Dialog/getMachineData"];
+        this.machineData = this.$store.getters["Dialog/getData"];
       }
     );
     this.turnOffMachineDialog =
@@ -48,11 +45,10 @@ export default {
   },
   methods: {
     turnOffMachine() {
-      console.log(this.machineData.id);
+      console.log(this.machineData);
     },
   },
 };
 </script>
 
-<style>
-</style>
+<style></style>

@@ -6,11 +6,7 @@
         <h1 class="regular text-3xl bold color-primary mr-2">گرافیک ابری</h1>
       </div>
       <div class="d-flex flex-row-reverse my-5">
-        <v-btn
-          color="primary"
-          height="55"
-          @click="$router.push('/panel/projects/add-project')"
-        >
+        <v-btn color="primary" height="55">
           <v-icon>mdi-plus</v-icon>
           <span>ایجاد گرافیک ابری جدید</span>
         </v-btn>

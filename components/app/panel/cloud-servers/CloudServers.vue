@@ -37,19 +37,19 @@
           <v-list-item link>
             <v-list-item-title>مدیریت نسخه های پشتیبان</v-list-item-title>
           </v-list-item>
-          <v-list-item link>
+          <v-list-item link @click="openDialog('hard_reboot')">
             <v-list-item-title>ریبوت سخت افزاری سرور</v-list-item-title>
           </v-list-item>
-          <v-list-item link>
+          <v-list-item link @click="openDialog('soft_reboot')">
             <v-list-item-title>ریبوت نرم افزاری سرور</v-list-item-title>
           </v-list-item>
-          <v-list-item link>
+          <v-list-item link @click="openDialog('stop')">
             <v-list-item-title>متوقف کردن سرور</v-list-item-title>
           </v-list-item>
-          <v-list-item link>
+          <v-list-item link @click="openDialog('pause')">
             <v-list-item-title>خاموش کردن سرور</v-list-item-title>
           </v-list-item>
-          <v-list-item link>
+          <v-list-item link @click="openDialog('suspend')">
             <v-list-item-title>حذف سرور</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -60,6 +60,7 @@
 
 <script>
 import moment from "moment-jalaali";
+
 export default {
   props: {
     serverData: {
@@ -67,6 +68,7 @@ export default {
       required: true,
     },
   },
+  components: {},
   data() {
     return {
       id: 5,
@@ -75,6 +77,28 @@ export default {
   computed: {
     createdAt() {
       return moment(this.serverData.created).format("HH:mm - jYYYY/jMM/jDD");
+    },
+  },
+  methods: {
+    openDialog(dialogType) {
+      this.$store.dispatch("Dialog/showDialog", {
+        name:
+          dialogType === "hard_reboot"
+            ? "HardwareRebootDialog"
+            : dialogType === "soft_reboot"
+            ? "SoftwareRebootDialog"
+            : dialogType === "stop"
+            ? "StopMachineDialog"
+            : dialogType === "pause"
+            ? "TurnOffMachineDialog"
+            : dialogType === "suspend"
+            ? "DeleteMachineDialog"
+            : "",
+        data: {
+          projectId: this.serverData.project_id,
+          vmId: this.serverData.id,
+        },
+      });
     },
   },
 };

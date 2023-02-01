@@ -6,10 +6,7 @@
           >mdi-close</v-icon
         >
       </div>
-      <h1 class="text-[24px] font-bold my-4 text-center">
-        متوقف کردن
-        {{ machineData.name }}
-      </h1>
+      <h1 class="text-[24px] font-bold my-4 text-center">متوقف کردن سرور</h1>
       <div class="mb-5 text-justify">
         این اقدام منجر به توقف سرور ابری و همه اطلاعات مربوط به آن میشود.
       </div>
@@ -39,7 +36,7 @@ export default {
       (state, getters) => getters["Dialog/active"],
       (newValue) => {
         this.stopMachineDialog = newValue === "StopMachineDialog";
-        this.machineData = this.$store.getters["Dialog/getMachineData"];
+        this.machineData = this.$store.getters["Dialog/getData"];
       }
     );
     this.stopMachineDialog =
@@ -53,5 +50,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

@@ -48,13 +48,16 @@ export default {
   methods: {
     async addProject() {
       if (this.$refs.validForm.validate()) {
+        this.loading = true;
         try {
-          const data = await this.$post("service/project/", {
+          const data = await this.$post("service/projects/", {
             name: this.projectName,
             description: this.projectDescription,
           });
+          this.loading = false;
           this.$router.push(`/panel/projects/${data.data.id}`);
         } catch (err) {
+          this.loading = false;
           console.log(err);
         }
       }

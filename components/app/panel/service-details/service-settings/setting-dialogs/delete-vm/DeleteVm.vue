@@ -6,10 +6,7 @@
           >mdi-close</v-icon
         >
       </div>
-      <h1 class="text-[24px] font-bold my-4 text-center">
-        حذف
-        {{ machineData.name }}
-      </h1>
+      <h1 class="text-[24px] font-bold my-4 text-center">حذف سرور</h1>
       <div class="mb-5 text-justify">
         در صورت حذف سرور ابری تمامی اطلاعات مربوطه از بین خواهد رفت.
       </div>
@@ -44,7 +41,7 @@ export default {
       (state, getters) => getters["Dialog/active"],
       (newValue) => {
         this.deleteMachineDialog = newValue === "DeleteMachineDialog";
-        this.machineData = this.$store.getters["Dialog/getMachineData"];
+        this.machineData = this.$store.getters["Dialog/getData"];
       }
     );
     this.deleteMachineDialog =
@@ -58,5 +55,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

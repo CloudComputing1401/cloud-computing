@@ -1,19 +1,19 @@
 <template>
   <v-container>
-    <div class="p-5 my-5 rounded-lg custom-shadow">
+    <div class="pa-4 my-5 rounded-lg shadow-lg bg-white">
       <div class="d-flex items-center justify-between">
         <div class="d-flex">
           <div class="bg-primary p-5 rounded-md">
             <v-icon color="#fff" size="60">mdi-file-cloud-outline</v-icon>
           </div>
           <div class="my-3 mr-2">
-            <h2 class="text-2xl font-weight-bold">نام پروژه</h2>
-            <div class="mt-2">اطلاعات پروژه</div>
+            <h2 class="text-2xl font-weight-bold">{{ projectInfo?.name }}</h2>
+            <div class="mt-2">{{ projectInfo?.description }}</div>
           </div>
         </div>
         <v-btn
           color="primary"
-          @click="$router.push(`/panel/projects/${'ali'}/edit`)"
+          @click="$router.push(`/panel/projects/${projectInfo.id}/edit`)"
         >
           ویرایش پروژه
         </v-btn>
@@ -39,7 +39,7 @@
           </v-tab-item>
           <v-tab-item>
             <v-card flat>
-              <project-firewall />
+              <project-firewalls />
             </v-card>
           </v-tab-item>
           <v-tab-item>
@@ -55,14 +55,14 @@
 
 <script>
 import ProjectBackupCopies from "../../../../components/app/panel/projects/project-backup/ProjectBackupCopies.vue";
-import ProjectFirewall from "../../../../components/app/panel/projects/project-firewall/ProjectFirewall.vue";
+import ProjectFirewalls from "../../../../components/app/panel/projects/project-firewalls/ProjectFirewalls.vue";
 import ProjectSetting from "../../../../components/app/panel/projects/project-setting/ProjectSetting.vue";
 import Services from "../../../../components/app/panel/projects/services/Services.vue";
 export default {
   components: {
     Services,
     ProjectSetting,
-    ProjectFirewall,
+    ProjectFirewalls,
     ProjectBackupCopies,
   },
   layout: "panel",
@@ -70,7 +70,24 @@ export default {
     return {
       tab: null,
       menuTabs: ["سرویس ها", "تنظیمات", "فایروال", "نسخه های پشتیبان"],
+      projectInfo: null,
     };
+  },
+  mounted() {
+    this.getProjectInfo();
+  },
+  methods: {
+    async getProjectInfo() {
+      try {
+        this.projectInfo = (
+          await this.$axios.get(`/service/project/${this.$route.params.id}`, {
+            headers: {
+              Authorization: this.$store.getters["Auth/getToken"],
+            },
+          })
+        ).data;
+      } catch (err) {}
+    },
   },
 };
 </script>

@@ -36,7 +36,7 @@ export default {
       (state, getters) => getters["Dialog/active"],
       (newValue) => {
         this.deleteBackupDialog = newValue === "DeleteBackupDialog";
-        this.machineData = this.$store.getters["Dialog/getMachineData"];
+        this.machineData = this.$store.getters["Dialog/getData"];
       }
     );
     this.deleteBackupDialog =
@@ -50,5 +50,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

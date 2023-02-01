@@ -6,14 +6,18 @@
     </div>
     <div
       :class="[
-        loading || projectData.length === 0 ? 'flex-center' : null,
+        loading || serversData.length === 0 ? 'flex-center' : null,
         'min-h-[200px]',
       ]"
     >
       <loading v-if="loading" />
       <template v-if="!loading">
-        <cloud-servers v-for="(i, index) in projectData" :key="index" />
-        <div v-if="projectData.length === 0">
+        <cloud-servers
+          v-for="serverData in serversData"
+          :key="serverData.id"
+          :serverData="serverData"
+        />
+        <div v-if="serversData.length === 0">
           <h1 class="regular text-xl">اطلاعاتی یافت نشد!</h1>
         </div>
       </template>
@@ -27,14 +31,27 @@ export default {
   components: { CloudServers },
   data() {
     return {
-      projectData: [],
+      serversData: [],
       loading: true,
     };
   },
   mounted() {
-    setTimeout(() => {
-      this.loading = false;
-    }, 2000);
+    this.getServerClouds();
+  },
+  methods: {
+    async getServerClouds() {
+      try {
+        this.serversData = (
+          await this.$get("service/vm/", {
+            project_id: this.$route.params.id,
+          })
+        ).data.data;
+        console.log(this.serversData, "hosseinali");
+        this.loading = false;
+      } catch (err) {
+        this.loading = false;
+      }
+    },
   },
 };
 </script>

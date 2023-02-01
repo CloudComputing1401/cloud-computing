@@ -7,8 +7,7 @@
         >
       </div>
       <h1 class="text-[24px] font-bold my-4 text-center">
-        ریبوت نرم افزاری
-        {{ machineData.name }}
+        ریبوت نرم افزاری سرور
       </h1>
       <div class="mb-5 text-justify">
         معادل ریستارت کردن از طریق سیستم عامل می باشد.
@@ -39,7 +38,7 @@ export default {
       (state, getters) => getters["Dialog/active"],
       (newValue) => {
         this.softwareRebootDialog = newValue === "SoftwareRebootDialog";
-        this.machineData = this.$store.getters["Dialog/getMachineData"];
+        this.machineData = this.$store.getters["Dialog/getData"];
       }
     );
     this.softwareRebootDialog =
@@ -53,5 +52,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

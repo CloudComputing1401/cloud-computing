@@ -6,11 +6,7 @@
         <h1 class="regular text-3xl bold color-primary ml-2">هارد دیسک ها</h1>
       </div>
       <div class="d-flex flex-row-reverse my-5">
-        <v-btn
-          color="primary"
-          height="55"
-          @click="$router.push('/panel/projects/add-project')"
-        >
+        <v-btn color="primary" height="55">
           <v-icon>mdi-plus</v-icon>
           <span>ایجاد هارد دیسک</span>
         </v-btn>
