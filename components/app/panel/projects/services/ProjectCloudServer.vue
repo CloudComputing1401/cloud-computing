@@ -22,13 +22,30 @@
         </div>
       </template>
     </div>
+    <hardware-reboot />
+    <software-reboot />
+    <stop-vm />
+    <turn-off-vm />
+    <delete-vm />
   </div>
 </template>
 
 <script>
+import HardwareReboot from "../../service-details/service-settings/setting-dialogs/hardware-reboot/HardwareReboot.vue";
+import SoftwareReboot from "../../service-details/service-settings/setting-dialogs/software-reboot/SoftwareReboot.vue";
+import StopVm from "../../service-details/service-settings/setting-dialogs/stop-vm/StopVm.vue";
+import TurnOffVm from "../../service-details/service-settings/setting-dialogs/turnoff-vm/TurnOffVm.vue";
+import DeleteVm from "../../service-details/service-settings/setting-dialogs/delete-vm/DeleteVm.vue";
 import CloudServers from "../../cloud-servers/CloudServers.vue";
 export default {
-  components: { CloudServers },
+  components: {
+    CloudServers,
+    HardwareReboot,
+    SoftwareReboot,
+    StopVm,
+    TurnOffVm,
+    DeleteVm,
+  },
   data() {
     return {
       serversData: [],

@@ -31,7 +31,7 @@
                 color="red"
                 class="ml-3"
                 :loading="deleteLoading"
-                @click="deleteSecurityGroup(firewall.id)"
+                @click="openDeleteFirewallDialog(firewall.id)"
               >
                 <span class="text-white">حذف گروه</span>
               </v-btn>
@@ -45,8 +45,20 @@
               <template v-slot:[`item.icon`]>
                 <v-icon> mdi-security </v-icon>
               </template>
-              <template v-slot:[`item.deleteRule`]>
-                <v-icon color="red"> mdi-delete </v-icon>
+              <template v-slot:[`item.direction`]="{ item }">
+                <span>
+                  {{ item.direction === "egress" ? "خروجی" : "ورودی" }}
+                </span>
+              </template>
+              <template v-slot:[`item.protocol`]="{ item }">
+                <span>
+                  {{ !item.protocol ? "-" : item.protocol }}
+                </span>
+              </template>
+              <template v-slot:[`item.deleteRule`]="{ item }">
+                <v-icon color="red" @click="openDeleteRuleDialog(item.id)">
+                  mdi-delete
+                </v-icon>
               </template>
             </v-data-table>
           </div>
@@ -57,14 +69,18 @@
       </div>
     </div>
     <add-firewall-dialog @update="getFirewalls" />
+    <delete-firewall-dialog @update="getFirewalls" />
+    <delete-rule-dialog @update="getFirewalls" />
     <snack-bar />
   </div>
 </template>
 
 <script>
 import AddFirewallDialog from "./add-firewall-dialog/AddFirewallDialog.vue";
+import DeleteFirewallDialog from "./delete-firewall-dialog/DeleteFirewallDialog.vue";
+import DeleteRuleDialog from "./delete-rule-dialog/DeleteRuleDialog.vue";
 export default {
-  components: { AddFirewallDialog },
+  components: { AddFirewallDialog, DeleteFirewallDialog, DeleteRuleDialog },
   data() {
     return {
       firewallsData: [],
@@ -134,22 +150,21 @@ export default {
         this.loading = false;
       } catch (err) {}
     },
-    async deleteSecurityGroup(id) {
-      this.deleteLoading = true;
-      try {
-        const data = await this.$axios.delete("/service/security-groups", {
-          headers: {
-            Authorization: this.$store.getters["Auth/getToken"],
-          },
-          params: {
-            project_id: this.$route.params.id,
-            security_id: id,
-          },
-        });
-        this.deleteLoading = false;
-        this.$store.dispatch("SnackBar/show", "گروه با موفقیت حذف شد.");
-        this.getFirewalls();
-      } catch (err) {}
+    openDeleteFirewallDialog(id) {
+      this.$store.dispatch("Dialog/showDialog", {
+        name: "DeleteFirewallDialog",
+        data: {
+          firewallId: id,
+        },
+      });
+    },
+    openDeleteRuleDialog(id) {
+      this.$store.dispatch("Dialog/showDialog", {
+        name: "DeleteRuleDialog",
+        data: {
+          ruleId: id,
+        },
+      });
     },
   },
 };

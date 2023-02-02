@@ -10,7 +10,9 @@
       <div class="mb-5 text-justify">
         این اقدام منجر به توقف سرور ابری و همه اطلاعات مربوط به آن میشود.
       </div>
-      <v-btn block color="primary" @click="stopMachine"> متوقف کردن </v-btn>
+      <v-btn block color="primary" @click="stopVmHandler" :loading="loading">
+        متوقف کردن
+      </v-btn>
     </div>
   </v-dialog>
 </template>
@@ -19,7 +21,8 @@
 export default {
   data: () => ({
     stopMachineDialog: false,
-    machineData: {},
+    vmData: {},
+    loading: false,
   }),
   watch: {
     stopMachineDialog(val) {
@@ -36,15 +39,36 @@ export default {
       (state, getters) => getters["Dialog/active"],
       (newValue) => {
         this.stopMachineDialog = newValue === "StopMachineDialog";
-        this.machineData = this.$store.getters["Dialog/getData"];
+        this.vmData = this.$store.getters["Dialog/getData"];
       }
     );
     this.stopMachineDialog =
       this.$store.getters["Dialog/active"] === "StopMachineDialog";
   },
   methods: {
-    stopMachine() {
-      console.log(this.machineData.id);
+    async stopVmHandler() {
+      this.loading = true;
+      try {
+        const data = await this.$axios.post(
+          "/service/vm/operation/",
+          {
+            operation: "pause",
+          },
+          {
+            headers: {
+              Authorization: this.$store.getters["Auth/getToken"],
+            },
+            params: {
+              project_id: this.vmData.projectId,
+              virtual_machine_id: this.vmData.vmId,
+            },
+          }
+        );
+        this.loading = false;
+        this.stopMachineDialog = false;
+      } catch (err) {
+        this.loading = false;
+      }
     },
   },
 };

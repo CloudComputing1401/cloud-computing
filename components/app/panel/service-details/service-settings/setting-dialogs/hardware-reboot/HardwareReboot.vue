@@ -36,9 +36,6 @@ export default {
         this.$store.dispatch("Dialog/showDialog", "");
       }
     },
-    vmData(val) {
-      console.log(val);
-    },
   },
   mounted() {
     this.$store.watch(
@@ -70,7 +67,11 @@ export default {
             },
           }
         );
-      } catch (err) {}
+        this.loading = false;
+        this.hardwareRebootDialog = false;
+      } catch (err) {
+        this.loading = false;
+      }
     },
   },
 };
