@@ -17,7 +17,25 @@
           alt=""
           class="w-[50px] h-[50px] ml-2"
         />
-        <span class="py-1 px-4 rounded text-white bg-green-500">فعال</span>
+        <span
+          class="py-1 px-4 rounded text-white"
+          :src="serverData.image.photo"
+          :class="`${
+            serverData.status === 'ACTIVE'
+              ? 'bg-green-500'
+              : serverData.status === 'ERROR'
+              ? 'bg-red-500'
+              : 'bg-blue-300'
+          }`"
+        >
+          {{
+            serverData.status === "ACTIVE"
+              ? "فعال"
+              : serverData.status === "ERROR"
+              ? "غیر فعال"
+              : "در حال ساخت "
+          }}
+        </span>
       </div>
       <div
         class="
@@ -86,11 +104,13 @@ export default {
       required: true,
     },
   },
-  components: {},
   data() {
     return {
       id: 5,
     };
+  },
+  mounted() {
+    console.log(this.serverData);
   },
   computed: {
     createdAt() {

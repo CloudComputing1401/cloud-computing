@@ -26,7 +26,7 @@
               <span> {{ firewall.description }} </span>
             </div>
             <div class="d-flex flex-row-reverse mb-5">
-              <v-btn color="primary">افزودن قانون</v-btn>
+              <!-- <v-btn color="primary">افزودن قانون</v-btn> -->
               <v-btn
                 color="red"
                 class="ml-3"
@@ -53,6 +53,11 @@
               <template v-slot:[`item.protocol`]="{ item }">
                 <span>
                   {{ !item.protocol ? "-" : item.protocol }}
+                </span>
+              </template>
+              <template v-slot:[`item.ether_type`]="{ item }">
+                <span>
+                  {{ !item.ether_type ? "-" : item.ether_type }}
                 </span>
               </template>
               <template v-slot:[`item.deleteRule`]="{ item }">
@@ -106,18 +111,18 @@ export default {
           sortable: false,
           value: "protocol",
         },
-        {
-          text: "پورت ها",
-          align: "center",
-          sortable: false,
-          value: "ports",
-        },
-        {
-          text: "مبدا/مقصد",
-          align: "center",
-          sortable: false,
-          value: "originDestination",
-        },
+        // {
+        //   text: "پورت ها",
+        //   align: "center",
+        //   sortable: false,
+        //   value: "ports",
+        // },
+        // {
+        //   text: "مبدا/مقصد",
+        //   align: "center",
+        //   sortable: false,
+        //   value: "originDestination",
+        // },
         {
           text: "",
           align: "center",

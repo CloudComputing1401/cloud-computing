@@ -46,20 +46,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.loading = false;
-      this.hardsData = [
-        {
-          id: 1,
-          name: "هارد دیسک یک",
-          capacity: "20 گیگ",
-          createdAt: "1401/8/8",
-        },
-        {
-          id: 2,
-          name: "هارد دیسک یک",
-          capacity: "20 گیگ",
-          createdAt: "1401/8/8",
-        },
-      ];
+      this.hardsData = [];
     }, 2000);
   },
 };

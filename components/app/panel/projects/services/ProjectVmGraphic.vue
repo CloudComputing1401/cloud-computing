@@ -27,7 +27,7 @@ export default {
   components: { GraphicsMachines },
   data() {
     return {
-      projectData: ["vm1", "vm2"],
+      projectData: [],
       loading: true,
     };
   },

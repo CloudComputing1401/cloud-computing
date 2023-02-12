@@ -1,9 +1,12 @@
 <template>
   <v-dialog max-width="600" v-model="dialog">
     <div class="p-4 bg-white">
-      <h1 class="text-[18px] font-semibold text-center">
+      <h1 class="text-[24px] font-semibold text-center">
         جزئیات سرور خریداری شده
       </h1>
+      <div class="flex-center" style="height: 200px">
+        <span class="text-[20px] font-semibold">اطلاعاتی یافت نشد!</span>
+      </div>
     </div>
   </v-dialog>
 </template>
