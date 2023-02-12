@@ -40,7 +40,15 @@
             <div
               v-for="(error, index) in errors"
               :key="index"
-              class="d-flex items-center p-4 rounded-md border border-red-500 bg-red-100 mb-4"
+              class="
+                d-flex
+                items-center
+                p-4
+                rounded-md
+                border border-red-500
+                bg-red-100
+                mb-4
+              "
             >
               <v-icon color="red" class="ml-2">mdi-alert-circle</v-icon>
               <span class="text-red-500">
@@ -130,6 +138,7 @@ export default {
             name: this.vmInfo.vmName,
             flavor_id: Number(this.flavorData.flavorId),
             keypair_id: this.accessSettingData.keyPairId,
+            instance_count: this.vmInfo.vmNumber,
           });
           this.loading = false;
           this.$store.dispatch("SnackBar/show", "ماشین با موفقیت ایجاد شد.");

@@ -1,17 +1,14 @@
 export const state = () => ({
   dialogName: "",
-  machineData: {
-    name: "",
-    id: "",
-  },
+  data: "",
 });
 
 export const getters = {
   active(state) {
     return state.dialogName;
   },
-  getMachineData(state) {
-    return state.machineData;
+  getData(state) {
+    return state.data;
   },
 };
 
@@ -19,9 +16,8 @@ export const mutations = {
   setDialogName(state, value) {
     state.dialogName = value;
   },
-  setMachineData(state, value) {
-    state.machineData.name = value.name;
-    state.machineData.id = value.id;
+  setData(state, value) {
+    state.data = value;
   },
 };
 
@@ -29,9 +25,9 @@ export const actions = {
   async showDialog({ commit }, data) {
     if (typeof data === "string") {
       commit("setDialogName", data);
-      commit("setMachineData", {});
+      commit("setData", {});
     } else {
-      await commit("setMachineData", data.data);
+      await commit("setData", data.data);
       commit("setDialogName", data.name);
     }
   },

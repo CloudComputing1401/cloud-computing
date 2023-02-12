@@ -33,7 +33,7 @@
           <template v-slot:[`item.description`]="{ item }">
             <span v-if="item.description === null"> توضیحاتی وجود ندارد </span>
             <span v-else>
-              {{ item.description.substring(0, 10) }}
+              {{ item.description.substring(0, 30) }}
             </span>
           </template>
           <template v-slot:[`item.more`]="{ item }">
@@ -88,7 +88,7 @@ export default {
   methods: {
     async getProjectsData() {
       try {
-        const data = await this.$get("service/project");
+        const data = await this.$get("service/projects");
         this.projectData = data.data;
         this.loading = false;
       } catch (err) {

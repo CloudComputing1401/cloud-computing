@@ -6,15 +6,14 @@
           >mdi-close</v-icon
         >
       </div>
-      <h1 class="text-[24px] font-bold my-4 text-center">
-        خاموش کردن
-        {{ machineData.name }}
-      </h1>
+      <h1 class="text-[24px] font-bold my-4 text-center">خاموش کردن سرور</h1>
       <div class="mb-5 text-justify">
         خاموش کردن سرور ابری از این طریق همانند قطع کردن اتصال برق است (پیشنهاد
         ما به شما خاموش کردن از طریق کنسول است).
       </div>
-      <v-btn block color="primary" @click="turnOffMachine"> خاموش کردن </v-btn>
+      <v-btn block color="primary" @click="turnOffVmHandler" :loading="loading">
+        خاموش کردن
+      </v-btn>
     </div>
   </v-dialog>
 </template>
@@ -23,7 +22,8 @@
 export default {
   data: () => ({
     turnOffMachineDialog: false,
-    machineData: {},
+    vmData: {},
+    loading: false,
   }),
   watch: {
     turnOffMachineDialog(val) {
@@ -40,19 +40,39 @@ export default {
       (state, getters) => getters["Dialog/active"],
       (newValue) => {
         this.turnOffMachineDialog = newValue === "TurnOffMachineDialog";
-        this.machineData = this.$store.getters["Dialog/getMachineData"];
+        this.vmData = this.$store.getters["Dialog/getData"];
       }
     );
     this.turnOffMachineDialog =
       this.$store.getters["Dialog/active"] === "TurnOffMachineDialog";
   },
   methods: {
-    turnOffMachine() {
-      console.log(this.machineData.id);
+    async turnOffVmHandler() {
+      this.loading = true;
+      try {
+        const data = await this.$axios.post(
+          "/service/vm/operation/",
+          {
+            operation: "suspend",
+          },
+          {
+            headers: {
+              Authorization: this.$store.getters["Auth/getToken"],
+            },
+            params: {
+              project_id: this.vmData.projectId,
+              virtual_machine_id: this.vmData.vmId,
+            },
+          }
+        );
+        this.loading = false;
+        this.turnOffMachineDialog = false;
+      } catch (err) {
+        this.loading = false;
+      }
     },
   },
 };
 </script>
 
-<style>
-</style>
+<style></style>

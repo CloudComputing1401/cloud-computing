@@ -30,7 +30,7 @@ export default {
   components: { HeavyComputingServers },
   data() {
     return {
-      projectData: ["ali", "ali"],
+      projectData: [],
       loading: true,
     };
   },

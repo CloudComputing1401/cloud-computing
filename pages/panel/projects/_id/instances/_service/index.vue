@@ -18,9 +18,12 @@
               <div class="d-flex items-center">
                 <div class="d-flex items-center">
                   <v-icon color="primary" size="50">mdi-nas</v-icon>
-                  <nuxt-link :to="`/panel/projects/test`" class="font-bold"
-                    >نام پروژه</nuxt-link
+                  <nuxt-link
+                    :to="`/panel/projects/${$route.params.id}`"
+                    class="font-bold"
                   >
+                    {{ projectInfo?.name }}
+                  </nuxt-link>
                   <div class="d-flex items-center mr-2">
                     <span>
                       {{
@@ -132,6 +135,7 @@ export default {
       tab: null,
       ip: "192.168.100.170",
       vmData: null,
+      projectInfo: null,
       menuTabs: [
         "دسترسی",
         "نمودارها",
@@ -145,12 +149,24 @@ export default {
   },
   mounted() {
     console.log(this.$route);
+    this.getProjectInfo();
     this.getVmData();
   },
   methods: {
     copyToCliboard() {
       navigator.clipboard.writeText(this.ip);
       this.$store.dispatch("SnackBar/show", "آیپی در کلیبورد ذخیره شد.");
+    },
+    async getProjectInfo() {
+      try {
+        this.projectInfo = (
+          await this.$axios.get(`/service/project/${this.$route.params.id}`, {
+            headers: {
+              Authorization: this.$store.getters["Auth/getToken"],
+            },
+          })
+        ).data;
+      } catch (err) {}
     },
     async getVmData() {
       try {

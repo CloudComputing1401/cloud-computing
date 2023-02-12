@@ -40,7 +40,7 @@ export default {
       (state, getters) => getters["Dialog/active"],
       (newValue) => {
         this.useBackupDialog = newValue === "UseBackupDialog";
-        this.machineData = this.$store.getters["Dialog/getMachineData"];
+        this.machineData = this.$store.getters["Dialog/getData"];
       }
     );
     this.useBackupDialog =
@@ -54,5 +54,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

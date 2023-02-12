@@ -108,25 +108,25 @@
     </div>
     <hardware-reboot />
     <software-reboot />
-    <stop-machine />
-    <turn-off-machine />
-    <delete-machine />
+    <stop-vm />
+    <turn-off-vm />
+    <delete-vm />
   </div>
 </template>
 
 <script>
-import DeleteMachine from "./setting-dialogs/delete-machine/DeleteMachine.vue";
+import DeleteVm from "./setting-dialogs/delete-vm/DeleteVm.vue";
 import HardwareReboot from "./setting-dialogs/hardware-reboot/HardwareReboot.vue";
 import SoftwareReboot from "./setting-dialogs/software-reboot/SoftwareReboot.vue";
-import StopMachine from "./setting-dialogs/stop-machine/StopMachine.vue";
-import TurnOffMachine from "./setting-dialogs/turnoff-machine/TurnOffMachine.vue";
+import StopVm from "./setting-dialogs/stop-vm/StopVm.vue";
+import TurnOffVm from "./setting-dialogs/turnoff-vm/TurnOffVm.vue";
 export default {
   components: {
     HardwareReboot,
     SoftwareReboot,
-    StopMachine,
-    TurnOffMachine,
-    DeleteMachine,
+    StopVm,
+    TurnOffVm,
+    DeleteVm,
   },
 };
 </script>
