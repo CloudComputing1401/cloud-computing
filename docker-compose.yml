@@ -1,0 +1,8 @@
+version: '3.3'
+services:
+  frontend-app:
+    build: .
+    container_name: frontend-app
+    # restart: unless-stopped
+    ports:
+      - 3000:3000
