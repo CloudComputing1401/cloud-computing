@@ -1,19 +1,11 @@
 <template>
   <div>
     <div
-      class="
-        d-block d-md-flex
-        items-center
-        justify-between
-        border border-[#d0d0d0]
-        rounded
-        p-3
-        my-3
-      "
+      class="d-block d-md-flex items-center justify-between border border-[#d0d0d0] rounded p-3 my-3"
     >
       <div class="flex-center">
         <img
-          :src="serverData.image.photo"
+          :src="serverData?.image?.photo"
           alt=""
           class="w-[50px] h-[50px] ml-2"
         />
@@ -38,17 +30,7 @@
         </span>
       </div>
       <div
-        class="
-          w-full
-          sm:w-[85%]
-          md:w-[60%]
-          d-block d-sm-flex
-          items-center
-          justify-between
-          mx-auto
-          my-5 my-md-0
-          text-center
-        "
+        class="w-full sm:w-[85%] md:w-[60%] d-block d-sm-flex items-center justify-between mx-auto my-5 my-md-0 text-center"
       >
         <div class="font-semibold">{{ serverData.name }}</div>
         <div class="my-2 sm:my-0">192.168.100.170:3000</div>
