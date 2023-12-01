@@ -132,21 +132,21 @@ export default {
           title: "سرور ابری",
           to: "/panel/cloud-server",
         },
-        {
-          icon: "mdi-cloud-percent",
-          title: "محاسبات ابری",
-          to: "/panel/cloud-computing",
-        },
-        {
-          icon: "mdi-expansion-card-variant",
-          title: "گرافیک ابری",
-          to: "/panel/cloud-graphics",
-        },
-        {
-          icon: "mdi-harddisk-plus",
-          title: "هارد دیسک",
-          to: "/panel/volumes",
-        },
+        // {
+        //   icon: "mdi-cloud-percent",
+        //   title: "محاسبات ابری",
+        //   to: "/panel/cloud-computing",
+        // },
+        // {
+        //   icon: "mdi-expansion-card-variant",
+        //   title: "گرافیک ابری",
+        //   to: "/panel/cloud-graphics",
+        // },
+        // {
+        //   icon: "mdi-harddisk-plus",
+        //   title: "هارد دیسک",
+        //   to: "/panel/volumes",
+        // },
         {
           icon: "mdi-wallet",
           title: "امور مالی",
