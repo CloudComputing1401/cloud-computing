@@ -21,10 +21,10 @@
           <cloud-server-info v-model="flavorData" />
         </div>
         <v-divider></v-divider>
-        <div class="my-10">
+        <!-- <div class="my-10">
           <operating-software />
         </div>
-        <v-divider></v-divider>
+        <v-divider></v-divider> -->
         <div class="my-10">
           <advanced-settings />
         </div>
@@ -40,15 +40,7 @@
             <div
               v-for="(error, index) in errors"
               :key="index"
-              class="
-                d-flex
-                items-center
-                p-4
-                rounded-md
-                border border-red-500
-                bg-red-100
-                mb-4
-              "
+              class="d-flex items-center p-4 rounded-md border border-red-500 bg-red-100 mb-4"
             >
               <v-icon color="red" class="ml-2">mdi-alert-circle</v-icon>
               <span class="text-red-500">
