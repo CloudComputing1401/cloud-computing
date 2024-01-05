@@ -4,13 +4,13 @@
       <h1 class="text-white text-lg">تنظیمات دسترسی</h1>
     </div>
     <div class="p-4">
-      <div class="p-3 rounded border border-blue-300 d-flex items-center">
+      <!-- <div class="p-3 rounded border border-blue-300 d-flex items-center">
         <v-icon color="#60a5fa"> mdi-alert-circle-outline </v-icon>
         <div class="mr-2 text-[#60a5fa] text-xl">
           انتخاب یکی از گزینه های زیر اجباریست
         </div>
-      </div>
-      <div class="custom-shadow p-4 rounded mt-10">
+      </div> -->
+      <!-- <div class="custom-shadow p-4 rounded mt-10">
         <h3 class="text-xl font-bold">فعال سازی رمز عبور</h3>
         <div class="d-flex justify-between items-center">
           <div>
@@ -18,8 +18,8 @@
           </div>
           <v-switch inset v-model="activePassword"></v-switch>
         </div>
-      </div>
-      <div class="custom-shadow p-4 rounded mt-10">
+      </div> -->
+      <div class="custom-shadow p-4 rounded">
         <h3 class="text-xl font-bold">افزودن کلید (SSH key)</h3>
         <div class="d-flex justify-between items-center my-5">
           <div>

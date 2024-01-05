@@ -3,7 +3,7 @@
     <div>
       <project-cloud-server />
     </div>
-    <div>
+    <!-- <div>
       <project-heavy-computing />
     </div>
     <div>
@@ -11,7 +11,7 @@
     </div>
     <div>
       <project-hard-disk />
-    </div>
+    </div> -->
   </div>
 </template>
 

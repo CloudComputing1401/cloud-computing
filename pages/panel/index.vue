@@ -20,11 +20,21 @@
               </div>
             </div>
           </v-col>
-          <v-col cols="6" sm="4" md="3" lg="2" v-for="i in 2" :key="i">
+          <v-col
+            cols="6"
+            sm="4"
+            md="3"
+            lg="2"
+            v-for="project in projectData"
+            :key="project.id"
+          >
             <div
-              class="w-[150] h-[150px] flex-center bg-[#2c3e50] rounded-md select-none cursor-pointer"
+              class="w-full h-[150px] flex-center bg-[#2c3e50] rounded-md select-none cursor-pointer"
+              @click="$router.push(`/panel/projects/${project.id}`)"
             >
-              <div class="text-white">پروژه پیشفرض</div>
+              <div class="text-white w-11/12 overflow-hidden">
+                {{ project.name }}
+              </div>
             </div>
           </v-col>
         </v-row>
@@ -88,9 +98,21 @@ export default {
         to: "finance",
       },
     ],
+    projectData: [],
   }),
   mounted() {
     this.activeUser = this.$store.getters["User/getActiveUser"];
+    this.getProjectsData();
+  },
+  methods: {
+    async getProjectsData() {
+      try {
+        const data = await this.$get("service/projects");
+        this.projectData = data.data;
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
 };
 </script>
