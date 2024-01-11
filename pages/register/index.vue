@@ -171,6 +171,7 @@ export default {
   methods: {
     async registerHandler() {
       if (this.$refs.validForm.validate()) {
+        this.$store.commit("Auth/clear");
         this.loading = true;
         try {
           const data = await this.$axios.post("users/register/", {
