@@ -11,11 +11,10 @@
         />
         <span
           class="py-1 px-4 rounded text-white"
-          :src="serverData.image.photo"
           :class="`${
             serverData.status === 'ACTIVE'
               ? 'bg-green-500'
-              : serverData.status === 'ERROR'
+              : serverData.status === 'ERROR' || serverData.status === 'PAUSED'
               ? 'bg-red-500'
               : 'bg-blue-300'
           }`"
@@ -25,6 +24,8 @@
               ? "فعال"
               : serverData.status === "ERROR"
               ? "غیر فعال"
+              : serverData.status === "PAUSED"
+              ? "متوقف"
               : "در حال ساخت "
           }}
         </span>
