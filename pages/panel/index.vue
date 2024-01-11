@@ -102,7 +102,7 @@ export default {
   }),
   mounted() {
     this.activeUser = this.$store.getters["User/getActiveUser"];
-    this.getProjectsData();
+    if (this.activeUser) this.getProjectsData();
   },
   methods: {
     async getProjectsData() {

@@ -25,3 +25,19 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.number-input.v-text-field--outlined
+  > .v-input__control
+  > .v-input__slot
+  > .v-text-field__slot
+  > input {
+  direction: ltr;
+}
+
+.number-input.v-text-field--outlined
+  > .v-input__control
+  > .v-input__slot
+  > .v-text-field__slot
+  > input::placeholder{
+  text-align: right !important;
+}
