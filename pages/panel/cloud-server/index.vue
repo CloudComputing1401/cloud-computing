@@ -77,7 +77,6 @@ export default {
     async getServerClouds() {
       try {
         this.serversData = (await this.$get("service/vm/")).data.data;
-        console.log(this.serversData, "hii");
         this.loading = false;
       } catch (err) {
         this.loading = false;
