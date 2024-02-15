@@ -63,7 +63,6 @@ export default {
             project_id: this.$route.params.id,
           })
         ).data.data;
-        console.log(this.serversData, "hosseinali");
         this.loading = false;
       } catch (err) {
         this.loading = false;

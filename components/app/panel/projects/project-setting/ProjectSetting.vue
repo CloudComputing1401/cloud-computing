@@ -9,7 +9,7 @@
         </div>
         <v-btn
           color="primary"
-          @click="$router.push(`/panel/projects/${'ali'}/edit`)"
+          @click="$router.push(`/panel/projects/${$route.params.id}/edit`)"
           >تغییر مشخصات</v-btn
         >
       </div>
@@ -22,7 +22,9 @@
           با حذف کردن پروژه ، تمام اطلاعات آن شامل سرورهای ابری و داده های
           مربوطه حذف خواهد شد و غیر قابل بازگشت میباشند.
         </div>
-        <v-btn color="red" outlined>حذف پروژه</v-btn>
+        <v-btn color="red" outlined :loading="loading" @click="deleteProject"
+          >حذف پروژه</v-btn
+        >
       </div>
       <div class="d-flex items-center p-5 bg-red-500 rounded mt-4">
         <v-icon color="white">mdi-alert-circle-outline</v-icon>
@@ -32,12 +34,38 @@
         </div>
       </div>
     </div>
+    <snack-bar />
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data: () => ({
+    loading: false,
+  }),
+  methods: {
+    async deleteProject() {
+      this.loading = true;
+      try {
+        const data = await this.$axios.delete(
+          `/service/project/${this.$route.params.id}`,
+          {
+            headers: {
+              Authorization: this.$store.getters["Auth/getToken"],
+            },
+          }
+        );
+        this.loading = false;
+        this.$store.dispatch("SnackBar/show", "پروژه با موفقیت حذف شد.");
+        await new Promise((resolve) => setTimeout(resolve, 2500));
+        this.$router.push(`/panel/projects`);
+      } catch (err) {
+        this.loading = false;
+        console.error(err);
+      }
+    },
+  },
+};
 </script>
 
-<style>
-</style>
+<style></style>

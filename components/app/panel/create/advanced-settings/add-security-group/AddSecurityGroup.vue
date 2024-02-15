@@ -40,8 +40,22 @@ export default {
       },
     ],
   }),
+  // mounted() {
+  //   this.getSecurityGroupList();
+  // },
+  // methods: {
+  //   async getSecurityGroupList() {
+  //     try {
+  //       this.sshList = (await this.$get("service/keypair")).data.data;
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   },
+  //   openDialog() {
+  //     this.$store.dispatch("Dialog/showDialog", "AddSshDialog");
+  //   },
+  // },
 };
 </script>
 
-<style>
-</style>
+<style></style>

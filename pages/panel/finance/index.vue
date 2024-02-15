@@ -45,17 +45,57 @@
           </div>
         </div>
         <div class="pa-4 mt-5 rounded-lg shadow-lg bg-white h-[500px]">
-          <div class="d-flex items-center">
-            <v-icon size="30" color="primary">mdi-list-box</v-icon>
-            <div class="text-[20px] font-semibold mr-2">لیست فاکتورها</div>
+          <div class="flex-between">
+            <div class="d-flex items-center">
+              <v-icon size="30" color="primary">mdi-list-box</v-icon>
+              <div class="text-[20px] font-semibold mr-2">لیست فاکتورها</div>
+            </div>
+            <div class="d-flex items-center gap-x-1">
+              <span>از</span>
+              <client-only>
+                <div
+                  class="invoice-from-date-input w-[100px] h-[30px] leading-none flex-center border border-solid border-gray-400 rounded-md"
+                >
+                  {{ invoiceFromDate }}
+                </div>
+                <date-picker
+                  v-model="invoiceFromDate"
+                  format="jYYYY/jMM/jDD"
+                  custom-input=".invoice-from-date-input"
+                  auto-submit
+                  :max="maxDate"
+                />
+              </client-only>
+              <span>تا</span>
+              <client-only>
+                <div
+                  class="invoice-to-date-input w-[100px] h-[30px] leading-none flex-center border border-solid border-gray-400 rounded-md"
+                >
+                  {{ invoiceToDate }}
+                </div>
+                <date-picker
+                  v-model="invoiceToDate"
+                  format="jYYYY/jMM/jDD"
+                  custom-input=".invoice-to-date-input"
+                  auto-submit
+                  :max="maxDate"
+                />
+              </client-only>
+              <v-btn color="primary" @click="getInvoicesList"> تایید </v-btn>
+            </div>
           </div>
           <v-data-table
             :headers="headers"
             :items="invoicesList"
-            no-data-text="فاکتوری ثبت نشده است!"
+            :loading="invoiceLoading"
+            loading-text="در حال دریافت اطلاعات..."
+            no-data-text="فاکتوری در این بازه زمانی ثبت نشده است!"
             hide-default-footer
             class="mt-5"
           >
+            <template v-slot:[`item.more`]="{ item }">
+              <v-btn text @click="showMore(item)"> جزئیات </v-btn>
+            </template>
           </v-data-table>
         </div>
       </v-col>
@@ -138,7 +178,10 @@
         </div>
       </v-col>
     </v-row>
-    <invoice-server-dialog />
+    <invoice-details-dialog
+      v-if="invoiceDetails"
+      :invoice-details="invoiceDetails"
+    />
     <increase-wallet-dialog />
     <increase-wallet-request-list-dialog
       :request-list="walletRequestList"
@@ -153,11 +196,11 @@ import moment from "moment-jalaali";
 
 import IncreaseWalletDialog from "../../../components/app/panel/finance/IncreaseWalletDialog.vue";
 import IncreaseWalletRequestListDialog from "../../../components/app/panel/finance/IncreaseWalletRequestListDialog.vue";
-import InvoiceServerDialog from "../../../components/app/panel/finance/InvoiceServerDialog.vue";
+import InvoiceDetailsDialog from "../../../components/app/panel/finance/InvoiceDetailsDialog.vue";
 export default {
   layout: "panel",
   components: {
-    InvoiceServerDialog,
+    InvoiceDetailsDialog,
     IncreaseWalletDialog,
     IncreaseWalletRequestListDialog,
   },
@@ -173,7 +216,7 @@ export default {
         text: "هزینه",
         align: "center",
         sortable: false,
-        value: "cost",
+        value: "totalPrice",
       },
       {
         text: "بیشتر",
@@ -219,10 +262,20 @@ export default {
     balanceLoading: true,
     getIncreaseWalletRequestsLoading: false,
     walletRequestList: [],
+    invoiceFromDate: moment().subtract(1, "months").format("jYYYY/jMM/jDD"),
+    invoiceToDate: moment().format("jYYYY/jMM/jDD"),
+    invoiceLoading: false,
+    invoiceDetails: undefined,
   }),
   mounted() {
     this.getUserWallet();
     this.getWalletTransactions();
+    this.getInvoicesList();
+  },
+  computed: {
+    maxDate() {
+      return moment().format("jYYYY-jMM-jDD");
+    },
   },
   methods: {
     async getUserWallet() {
@@ -259,8 +312,39 @@ export default {
         console.error(err);
       }
     },
-    showMore() {
+    async getInvoicesList() {
+      this.invoiceLoading = true;
+      this.invoicesList = [];
+      try {
+        const data = (
+          await this.$get("reports/invoices/", {
+            start_time: moment(
+              this.invoiceFromDate,
+              "jYYYY/jMM/jDD"
+            ).toISOString(),
+            end_time: moment(this.invoiceToDate, "jYYYY/jMM/jDD").toISOString(),
+          })
+        ).data;
+        data.forEach((item) => {
+          this.invoicesList.push({
+            name: item.invoice_record[0].name,
+            description: item.invoice_record[0].description,
+            recordType: item.invoice_record[0].record_type,
+            isPaid: item.is_paid,
+            startDate: moment(item.start_date).format("HH:mm - jYYYY/jMM/jDD"),
+            endDate: moment(item.end_date).format("HH:mm - jYYYY/jMM/jDD"),
+            totalPrice: new Intl.NumberFormat().format(item.total_amount),
+          });
+        });
+        this.invoiceLoading = false;
+      } catch (err) {
+        this.invoiceLoading = false;
+        console.error(err);
+      }
+    },
+    showMore(invoice) {
       this.$store.dispatch("Dialog/showDialog", "InvoiceServerDialog");
+      this.invoiceDetails = invoice;
     },
     increaseWalletDialog() {
       this.$store.dispatch("Dialog/showDialog", "IncreaseWalletDialog");

@@ -25,11 +25,7 @@
           label="مقدار"
           placeholder="مقدار هزینه ای که میخواهید افزایش دهید را وارد کنید"
           outlined
-          :rules="[
-            (v) => !!v || 'وارد کردن مقدار افزایش موجودی الزامی است.',
-            (v) =>
-              /^[0-9]+$/g.test(v) || 'لطفا مقدار را به صورت عددی وارد کنید.',
-          ]"
+          :rules="amountRules"
           :hint="
             amount.length > 3
               ? amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
@@ -50,7 +46,12 @@
           ]"
           @change="uploadFile"
         ></v-file-input>
-        <v-textarea label="توضیحات" outlined v-model="description" />
+        <v-textarea
+          label="توضیحات"
+          outlined
+          v-model="description"
+          :rules="[(v) => !!v || 'وارد کردن توضیحات الزامی است.']"
+        />
         <div class="w-full flex flex-row-reverse">
           <v-btn
             color="primary"
@@ -101,6 +102,14 @@ export default {
     );
     this.dialog =
       this.$store.getters["Dialog/active"] === "IncreaseWalletDialog";
+  },
+  computed: {
+    amountRules() {
+      return [
+        (v) => !!v || "وارد کردن مقدار افزایش موجودی الزامی است.",
+        (v) => /^[0-9]+$/g.test(v) || "لطفا مقدار را به صورت عددی وارد کنید.",
+      ];
+    },
   },
   methods: {
     uploadFile(e) {
