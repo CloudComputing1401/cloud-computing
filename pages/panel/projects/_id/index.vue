@@ -42,11 +42,11 @@
               <project-firewalls />
             </v-card>
           </v-tab-item>
-          <v-tab-item>
+          <!-- <v-tab-item>
             <v-card flat>
               <project-backup-copies />
             </v-card>
-          </v-tab-item>
+          </v-tab-item> -->
         </v-tabs-items>
       </div>
     </div>
@@ -69,7 +69,7 @@ export default {
   data() {
     return {
       tab: null,
-      menuTabs: ["سرویس ها", "تنظیمات", "فایروال", "نسخه های پشتیبان"],
+      menuTabs: ["سرویس ها", "تنظیمات", "فایروال"],
       projectInfo: null,
     };
   },

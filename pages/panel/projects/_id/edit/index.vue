@@ -33,6 +33,7 @@
         </v-col>
       </v-row>
     </div>
+    <snack-bar />
   </v-container>
 </template>
 
@@ -70,7 +71,7 @@ export default {
         this.loading = true;
         try {
           const data = await this.$axios.patch(
-            `/service/project/`,
+            `/service/project/${this.$route.params.id}`,
             {
               name: this.name,
               description: this.description,
@@ -79,13 +80,15 @@ export default {
               headers: {
                 Authorization: this.$store.getters["Auth/getToken"],
               },
-              params: {
-                project_id: this.$route.params.id,
-              },
             }
           );
-          console.log(data);
           this.loading = false;
+          this.$store.dispatch(
+            "SnackBar/show",
+            "اطلاعات پروژه با موفقیت ویرایش شد."
+          );
+          await new Promise((resolve) => setTimeout(resolve, 2500));
+          this.$router.push(`/panel/projects/${this.$route.params.id}`);
         } catch (err) {
           this.loading = false;
         }
