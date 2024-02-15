@@ -51,11 +51,16 @@
           </div>
           <div>
             <div>
-              <v-btn color="primary" height="20" class="rounded-lg" @click="openConsole">
+              <v-btn
+                color="primary"
+                height="20"
+                class="rounded-lg"
+                @click="openConsole"
+              >
                 <v-icon class="ml-2">mdi-monitor</v-icon>
                 مشاهده در کنسول
               </v-btn>
-              </div>
+            </div>
             <div>
               <v-tooltip bottom>
                 <template v-slot:activator="{ on, attrs }">
@@ -69,7 +74,7 @@
                     v-on="on"
                   >
                     <v-icon class="ml-2">mdi-content-copy</v-icon>
-                    {{ ip }}
+                    {{ vmData.accessIPv4 }}
                   </v-btn>
                 </template>
                 <span>کپی آی پی</span>
@@ -89,7 +94,7 @@
             <v-tab-item>
               <console-access :vmData="vmData" />
             </v-tab-item>
-              <v-tab-item>
+            <v-tab-item>
               <service-charts />
             </v-tab-item>
             <v-tab-item>
@@ -163,14 +168,14 @@ export default {
         });
         const consoleUrl = response.data.data.console_url;
         // Open the console URL in a new tab
-        window.open(consoleUrl, '_blank');
+        window.open(consoleUrl, "_blank");
       } catch (error) {
         console.error("Error opening console:", error);
       }
     },
 
     copyToCliboard() {
-      navigator.clipboard.writeText(this.ip);
+      navigator.clipboard.writeText(this.vmData.accessIPv4);
       this.$store.dispatch("SnackBar/show", "آیپی در کلیبورد ذخیره شد.");
     },
     async getProjectInfo() {

@@ -34,7 +34,7 @@
         class="w-full sm:w-[85%] md:w-[60%] d-block d-sm-flex items-center justify-between mx-auto my-5 my-md-0 text-center"
       >
         <div class="font-semibold">{{ serverData.name }}</div>
-        <div class="my-2 sm:my-0">192.168.100.170:3000</div>
+        <div class="my-2 sm:my-0">{{ serverData.accessIPv4 }}</div>
         <div>{{ createdAt }}</div>
       </div>
       <v-menu rounded offset-y>
