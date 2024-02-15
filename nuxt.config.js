@@ -33,6 +33,7 @@ export default {
     { src: "~/plugins/GlobalComponents" },
     { src: "~/plugins/persistedState.client.js" },
     { src: "~/plugins/axios" },
+    { src: "@/plugins/datePicker", ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
