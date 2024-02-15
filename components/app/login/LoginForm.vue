@@ -11,15 +11,7 @@
         outlined
         label="ایمیل"
         placeholder="ایمیل خود را وارد کنید"
-        :rules="[
-          (v) => !!v || 'وارد کردن ایمیل الزامی است',
-          (v) =>
-            !v.match(/^[\u0600-\u06FF\s]+$/) || 'ایمیل با حروف انگلیسی است.',
-          (v) =>
-            v.length === 0 ||
-            /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
-            'ایمیل اشتباه است.',
-        ]"
+        :rules="emailRules"
       />
       <v-text-field
         v-model="password"
@@ -27,10 +19,7 @@
         outlined
         label="پسوورد"
         placeholder="پسوورد خود را وارد کنید"
-        :rules="[
-          (v) => !!v || 'وارد کردن رمز عبور الزامی است.',
-          (v) => v.length >= 8 || 'رمز عبور حداقل باید شامل ۸کارکتر باشد.',
-        ]"
+        :rules="passwordRules"
         maxlength="50"
         :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
         @click:append="showPassword = !showPassword"
@@ -67,6 +56,24 @@ export default {
       validForm: true,
       loading: false,
     };
+  },
+  computed: {
+    passwordRules() {
+      return [
+        (v) => !!v || "وارد کردن رمز عبور الزامی است.",
+        (v) => v.length >= 8 || "رمز عبور حداقل باید شامل ۸کارکتر باشد.",
+      ];
+    },
+    emailRules() {
+      return [
+        (v) => !!v || "وارد کردن ایمیل الزامی است",
+        (v) => !v.match(/^[\u0600-\u06FF\s]+$/) || "ایمیل با حروف انگلیسی است.",
+        (v) =>
+          v.length === 0 ||
+          /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
+          "ایمیل اشتباه است.",
+      ];
+    },
   },
   methods: {
     async login() {
