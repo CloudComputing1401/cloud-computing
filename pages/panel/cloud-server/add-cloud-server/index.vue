@@ -139,6 +139,11 @@ export default {
         } catch (err) {
           this.loading = false;
           console.log(err);
+          if (err.response?.status === 403)
+            this.$store.dispatch("SnackBar/show", {
+              text: "موجودی کیف پول شما کافی نمی باشد, از طریق بخش مالی می توانید اقدام به شارژکیف پول خود نمایید.",
+              type: "error",
+            });
         }
       }
     },
