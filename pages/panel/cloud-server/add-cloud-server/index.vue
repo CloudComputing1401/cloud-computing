@@ -18,6 +18,10 @@
         </div>
         <v-divider></v-divider>
         <div class="my-10">
+          <machin-info v-model="vmInfo" />
+        </div>
+        <v-divider></v-divider>
+        <div class="my-10">
           <cloud-server-info v-model="flavorData" />
         </div>
         <v-divider></v-divider>
@@ -31,9 +35,6 @@
         <v-divider></v-divider>
         <div class="my-10">
           <access-settings v-model="accessSettingData" />
-        </div>
-        <div class="my-10">
-          <machin-info v-model="vmInfo" />
         </div>
         <v-expand-transition>
           <div v-if="errors.length > 0">
