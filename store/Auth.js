@@ -14,6 +14,9 @@ export const getters = {
   getWithoutBearerToken(state) {
     return state.withoutBearerToken;
   },
+  isUserAuthenticated(state) {
+    return !!state.token;
+  },
 };
 
 export const mutations = {
