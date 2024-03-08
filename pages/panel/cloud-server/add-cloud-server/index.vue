@@ -62,7 +62,6 @@
         </div>
       </v-form>
     </div>
-    <snack-bar />
   </v-container>
 </template>
 
@@ -134,17 +133,21 @@ export default {
             instance_count: this.vmInfo.vmNumber,
           });
           this.loading = false;
-          this.$store.dispatch("SnackBar/show", "ماشین با موفقیت ایجاد شد.");
-          await new Promise((resolve) => setTimeout(resolve, 2500));
+
+          this.$toast.success("ماشین با موفقیت ایجاد شد.", {
+            timeout: 3000,
+          });
           this.$router.push("/panel/cloud-server");
         } catch (err) {
           this.loading = false;
           console.log(err);
           if (err.response?.status === 403)
-            this.$store.dispatch("SnackBar/show", {
-              text: "موجودی کیف پول شما کافی نمی باشد, از طریق بخش مالی می توانید اقدام به شارژکیف پول خود نمایید.",
-              type: "error",
-            });
+            this.$toast.error(
+              "موجودی کیف پول شما کافی نمی باشد, از طریق بخش مالی می توانید اقدام به شارژکیف پول خود نمایید.",
+              {
+                timeout: 5000,
+              }
+            );
         }
       }
     },

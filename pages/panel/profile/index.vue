@@ -93,8 +93,6 @@
         </v-form>
       </div>
     </div>
-
-    <snack-bar />
   </v-container>
 </template>
 
@@ -111,7 +109,10 @@ export default {
         nationalId: (value) =>
           /^(?:\d{10}|\d{12})$/.test(value) || "شماره ملی معتبر نیست.",
         phoneNumber: (value) =>
-          value === '' || value === undefined || /^(09\d{9})$/.test(value) || 'شماره همراه معتبر نیست.',
+          value === "" ||
+          value === undefined ||
+          /^(09\d{9})$/.test(value) ||
+          "شماره همراه معتبر نیست.",
       },
 
       user: {
@@ -143,15 +144,14 @@ export default {
       try {
         const response = await this.$put("users/profile/", this.user);
         console.log("Profile updated successfully:", response.data);
-        this.$store.dispatch("SnackBar/show", {
-          text: "اطلاعات با موفقیت به‌روز شد.",
-          type: "success",
+
+        this.$toast.success("اطلاعات با موفقیت به‌روز شد.", {
+          timeout: 3000,
         });
       } catch (error) {
         console.error("Error updating user profile:", error);
-        this.$store.dispatch("SnackBar/show", {
-          text: "مشکلی در به‌روزرسانی اطلاعات به وجود آمد.",
-          type: "error",
+        this.$toast.error("مشکلی در به‌روزرسانی اطلاعات به وجود آمد.", {
+          timeout: 4000,
         });
       }
     },
@@ -161,15 +161,13 @@ export default {
           "users/change-password/",
           this.password
         );
-        this.$store.dispatch("SnackBar/show", {
-          text: "اطلاعات با موفقیت به‌روز شد.",
-          type: "success",
+        this.$toast.success("اطلاعات با موفقیت به‌روز شد.", {
+          timeout: 3000,
         });
       } catch (error) {
         console.error("Error changing password:", error);
-        this.$store.dispatch("SnackBar/show", {
-          text: "مشکلی در تغییر رمز عبور به وجود آمد.",
-          type: "error",
+        this.$toast.error("مشکلی در تغییر رمز عبور به وجود آمد.", {
+          timeout: 4000,
         });
       }
     },

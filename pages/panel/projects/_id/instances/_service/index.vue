@@ -113,7 +113,6 @@
         </div>
       </template>
     </div>
-    <snack-bar />
   </v-container>
 </template>
 
@@ -176,7 +175,9 @@ export default {
 
     copyToCliboard() {
       navigator.clipboard.writeText(this.vmData.accessIPv4);
-      this.$store.dispatch("SnackBar/show", "آیپی در کلیبورد ذخیره شد.");
+      this.$toast.success("SnackBar/show", "آیپی در کلیبورد ذخیره شد.", {
+        timeout: 4000,
+      });
     },
     async getProjectInfo() {
       try {

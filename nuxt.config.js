@@ -30,10 +30,11 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: "~/plugins/GlobalComponents" },
-    { src: "~/plugins/persistedState.client.js" },
+    { src: "~/plugins/global-components" },
+    { src: "~/plugins/persisted-state.client.js" },
     { src: "~/plugins/axios" },
-    { src: "@/plugins/datePicker", ssr: false },
+    { src: "@/plugins/date-picker", ssr: false },
+    { src: "@/plugins/toast.client.js" },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -50,6 +51,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
+    "vue-toastification/nuxt",
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

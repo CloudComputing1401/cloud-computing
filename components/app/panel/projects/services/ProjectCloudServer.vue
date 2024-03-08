@@ -2,7 +2,11 @@
   <div>
     <div class="flex-between my-[30px]">
       <h2 class="text-[28px] font-bold">سرورهای ابری</h2>
-      <v-btn color="primary">سرور ابری جدید</v-btn>
+      <v-btn
+        color="primary"
+        @click="$router.push('/panel/cloud-server/add-cloud-server')"
+        >سرور ابری جدید</v-btn
+      >
     </div>
     <div
       :class="[

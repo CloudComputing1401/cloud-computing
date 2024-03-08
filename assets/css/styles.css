@@ -38,6 +38,10 @@
   > .v-input__control
   > .v-input__slot
   > .v-text-field__slot
-  > input::placeholder{
+  > input::placeholder {
   text-align: right !important;
+}
+
+.Vue-Toastification__toast {
+  font-family: "Yekan_Bakh_Regular" !important;
 }

@@ -95,12 +95,10 @@
         </v-col>
       </v-row>
     </div>
-    <snack-bar />
   </div>
 </template>
 
 <script>
-import SnackBar from "../../components/core/SnackBar/SnackBar.vue";
 export default {
   layout: "login",
   data() {
@@ -165,7 +163,7 @@ export default {
   methods: {
     async registerHandler() {
       if (this.$refs.validForm.validate()) {
-        this.$store.commit("Auth/clear");
+        this.$axios.setHeader("Authorization", null);
         this.loading = true;
         try {
           const data = await this.$axios.post("users/register/", {
@@ -176,26 +174,22 @@ export default {
             phone_number: this.registerData.mobile,
           });
           this.loading = false;
-          this.$store.dispatch(
-            "SnackBar/show",
-            "ثبت نام شما با موفقیت انجام شد."
-          );
+
+          this.$toast.success("ثبت نام شما با موفقیت انجام شد.", {
+            timeout: 3000,
+          });
           setTimeout(() => {
             this.$router.push("/login");
-          }, 2000);
+          }, 3000);
         } catch (err) {
           this.loading = false;
           this.errorMessage = "مشکل در ارسال اطلاعات";
           if (err.response.status === 400)
             this.errorMessage = "ایمیل وارد شده تکراری میباشد";
-          this.$store.dispatch(
-            "SnackBar/show",
-            {
-              text: this.errorMessage,
-              type: "error",
-            },
-            4000
-          );
+
+          this.$toast.error(this.errorMessage, {
+            timeout: 4000,
+          });
         }
       }
     },
