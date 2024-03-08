@@ -92,9 +92,6 @@ export default {
       id: 5,
     };
   },
-  mounted() {
-    console.log(this.serverData);
-  },
   computed: {
     createdAt() {
       return moment(this.serverData.created).format("HH:mm - jYYYY/jMM/jDD");

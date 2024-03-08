@@ -78,7 +78,6 @@ export default {
       this.$emit("input", value);
     },
     project(val) {
-      console.log(val, "project");
       const value = this.value;
       value.projectId = val;
       this.$emit("input", value);

@@ -89,7 +89,7 @@ export default {
   }),
   methods: {
     showHardSelected(value) {
-      console.log(value, "hii");
+      console.log(value);
     },
   },
 };

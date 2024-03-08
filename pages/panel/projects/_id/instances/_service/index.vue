@@ -152,7 +152,6 @@ export default {
     };
   },
   mounted() {
-    console.log(this.$route);
     this.getProjectInfo();
     this.getVmData();
   },
@@ -199,7 +198,6 @@ export default {
           })
         ).data.data[0];
         this.loading = false;
-        console.log(this.vmData);
       } catch (err) {}
     },
   },

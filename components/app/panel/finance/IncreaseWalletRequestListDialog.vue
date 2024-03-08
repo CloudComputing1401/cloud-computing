@@ -117,7 +117,6 @@ export default {
           formData.append("description", this.description);
           formData.append("photo", this.imageFile);
           const data = await this.$post("wallet/user_requests/", formData);
-          console.log(data, "data");
           this.loading = false;
 
           this.$toast.success("درخواست شما با موفقیت ثبت شد.", {
