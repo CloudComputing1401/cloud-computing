@@ -29,7 +29,7 @@
                   @click="selectedItem = flavorDetail.id"
                 >
                   <div
-                    class="py-3 text-white"
+                    class="py-3 text-white overflow-hidden"
                     :class="
                       flavorDetail.serverSelected
                         ? 'bg-[#34495e] border-b border-white'
@@ -37,8 +37,22 @@
                     "
                   >
                     <h1 class="text-xl">{{ flavorDetail.name }}</h1>
-                    <!-- <h1 class="text-xl">6,000 ریال/ ساعتی</h1>
-                    <h3 class="text-lg">144,000 ریال/ روزانه</h3> -->
+                    <h1 class="text-xl">
+                      {{
+                        new Intl.NumberFormat().format(
+                          flavorDetail.ratings.hourly
+                        )
+                      }}
+                      ریال/ ساعتی
+                    </h1>
+                    <h3 class="text-lg">
+                      {{
+                        new Intl.NumberFormat().format(
+                          flavorDetail.ratings.daily
+                        )
+                      }}
+                      ریال/ روزانه
+                    </h3>
                   </div>
                   <div class="pa-2">
                     <div class="my-2 flex-center">

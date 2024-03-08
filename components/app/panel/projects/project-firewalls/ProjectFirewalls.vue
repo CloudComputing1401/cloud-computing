@@ -76,7 +76,6 @@
     <add-firewall-dialog @update="getFirewalls" />
     <delete-firewall-dialog @update="getFirewalls" />
     <delete-rule-dialog @update="getFirewalls" />
-    <snack-bar />
   </div>
 </template>
 

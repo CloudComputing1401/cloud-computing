@@ -18,6 +18,10 @@
         </div>
         <v-divider></v-divider>
         <div class="my-10">
+          <machin-info v-model="vmInfo" />
+        </div>
+        <v-divider></v-divider>
+        <div class="my-10">
           <cloud-server-info v-model="flavorData" />
         </div>
         <v-divider></v-divider>
@@ -31,9 +35,6 @@
         <v-divider></v-divider>
         <div class="my-10">
           <access-settings v-model="accessSettingData" />
-        </div>
-        <div class="my-10">
-          <machin-info v-model="vmInfo" />
         </div>
         <v-expand-transition>
           <div v-if="errors.length > 0">
@@ -61,7 +62,6 @@
         </div>
       </v-form>
     </div>
-    <snack-bar />
   </v-container>
 </template>
 
@@ -133,12 +133,21 @@ export default {
             instance_count: this.vmInfo.vmNumber,
           });
           this.loading = false;
-          this.$store.dispatch("SnackBar/show", "ماشین با موفقیت ایجاد شد.");
-          await new Promise((resolve) => setTimeout(resolve, 2500));
+
+          this.$toast.success("ماشین با موفقیت ایجاد شد.", {
+            timeout: 3000,
+          });
           this.$router.push("/panel/cloud-server");
         } catch (err) {
           this.loading = false;
           console.log(err);
+          if (err.response?.status === 403)
+            this.$toast.error(
+              "موجودی کیف پول شما کافی نمی باشد, از طریق بخش مالی می توانید اقدام به شارژکیف پول خود نمایید.",
+              {
+                timeout: 5000,
+              }
+            );
         }
       }
     },

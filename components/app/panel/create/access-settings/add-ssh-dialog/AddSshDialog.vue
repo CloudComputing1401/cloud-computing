@@ -63,7 +63,6 @@
           >انصراف</v-btn
         >
       </div>
-      <snack-bar />
     </div>
   </v-dialog>
 </template>
@@ -112,16 +111,19 @@ export default {
           );
           this.loading = false;
           this.$emit("updateList");
-          this.$store.dispatch("SnackBar/show", "کلید با موفقیت افزوده شد.");
-          await new Promise((resolve) => setTimeout(resolve, 2000));
+          this.$toast.success("کلید با موفقیت افزوده شد.", {
+            timeout: 3000,
+          });
           this.$emit("closeDialog");
         } catch (err) {
           this.loading = false;
           console.log(err.response);
-          this.$store.dispatch("SnackBar/show", {
-            type: "error",
-            text: "کلید وارد شده یا نامعتبر و یا از قبل وجود داشته است",
-          });
+          this.$toast.error(
+            "کلید وارد شده یا نامعتبر و یا از قبل وجود داشته است",
+            {
+              timeout: 3000,
+            }
+          );
         }
       }
     },

@@ -60,8 +60,6 @@ export default {
         const data = (await this.$get("service/image")).data.data;
 
         let temp = [];
-        console.log(data, "data");
-
         data.forEach((element) => {
           const osDistro = element.os_distro;
           const osPhoto = element.photo;
@@ -81,7 +79,6 @@ export default {
         this.osLists = Array.from(new Set(temp.map(JSON.stringify))).map(
           JSON.parse
         );
-        console.log(this.osLists, "os list");
 
         this.loading = false;
       } catch (err) {

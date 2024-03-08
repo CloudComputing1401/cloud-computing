@@ -113,7 +113,6 @@
         </div>
       </template>
     </div>
-    <snack-bar />
   </v-container>
 </template>
 
@@ -153,7 +152,6 @@ export default {
     };
   },
   mounted() {
-    console.log(this.$route);
     this.getProjectInfo();
     this.getVmData();
   },
@@ -176,7 +174,9 @@ export default {
 
     copyToCliboard() {
       navigator.clipboard.writeText(this.vmData.accessIPv4);
-      this.$store.dispatch("SnackBar/show", "آیپی در کلیبورد ذخیره شد.");
+      this.$toast.success("SnackBar/show", "آیپی در کلیبورد ذخیره شد.", {
+        timeout: 4000,
+      });
     },
     async getProjectInfo() {
       try {
@@ -198,7 +198,6 @@ export default {
           })
         ).data.data[0];
         this.loading = false;
-        console.log(this.vmData);
       } catch (err) {}
     },
   },

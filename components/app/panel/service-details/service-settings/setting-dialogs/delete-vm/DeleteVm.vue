@@ -10,12 +10,14 @@
       <div class="mb-5 text-justify">
         در صورت حذف سرور ابری تمامی اطلاعات مربوطه از بین خواهد رفت.
       </div>
-      <div class="mb-5">
+      <!-- <div class="mb-5">
         <v-checkbox
           label="تمامی اسنپ شات های این ماشین نیز حذف شود."
         ></v-checkbox>
-      </div>
-      <v-btn block color="primary" @click="deleteMachine"> حذف کردن </v-btn>
+      </div> -->
+      <v-btn block color="primary" :loading="loading" @click="deleteMachine">
+        حذف کردن
+      </v-btn>
     </div>
   </v-dialog>
 </template>
@@ -24,7 +26,8 @@
 export default {
   data: () => ({
     deleteMachineDialog: false,
-    machineData: {},
+    loading: false,
+    vmData: {},
   }),
   watch: {
     deleteMachineDialog(val) {
@@ -41,15 +44,36 @@ export default {
       (state, getters) => getters["Dialog/active"],
       (newValue) => {
         this.deleteMachineDialog = newValue === "DeleteMachineDialog";
-        this.machineData = this.$store.getters["Dialog/getData"];
+        this.vmData = this.$store.getters["Dialog/getData"];
       }
     );
     this.deleteMachineDialog =
       this.$store.getters["Dialog/active"] === "DeleteMachineDialog";
   },
   methods: {
-    deleteMachine() {
-      console.log(this.machineData.id);
+    async deleteMachine() {
+      this.loading = true;
+      try {
+        const data = await this.$axios.delete("/service/vm", {
+          headers: {
+            Authorization: this.$store.getters["Auth/getToken"],
+          },
+          params: {
+            project_id: this.vmData.projectId,
+            virtual_machine_id: this.vmData.vmId,
+          },
+        });
+        this.loading = false;
+        this.$toast.success("ماشین با موفقیت حذف شد.", {
+          timeout: 3000,
+        });
+        // this.$router.push(`/panel/cloud-server`);
+        this.$emit("getVmList");
+        this.deleteMachineDialog = false;
+      } catch (err) {
+        this.loading = false;
+        console.error(err);
+      }
     },
   },
 };

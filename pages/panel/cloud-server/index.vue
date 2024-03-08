@@ -42,7 +42,7 @@
     <software-reboot />
     <stop-vm />
     <turn-off-vm />
-    <delete-vm />
+    <delete-vm @getVmList="getServerClouds" />
   </v-container>
 </template>
 
@@ -67,7 +67,7 @@ export default {
   data() {
     return {
       serversData: [],
-      loading: true,
+      loading: false,
     };
   },
   mounted() {
@@ -75,6 +75,7 @@ export default {
   },
   methods: {
     async getServerClouds() {
+      this.loading = true;
       try {
         this.serversData = (await this.$get("service/vm/")).data.data;
         this.loading = false;

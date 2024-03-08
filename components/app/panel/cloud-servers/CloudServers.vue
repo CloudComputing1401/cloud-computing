@@ -12,22 +12,15 @@
         <span
           class="py-1 px-4 rounded text-white"
           :class="`${
-            serverData.status === 'ACTIVE'
+            serverData.status === serverStatuses.ACTIVE
               ? 'bg-green-500'
-              : serverData.status === 'ERROR' || serverData.status === 'PAUSED'
+              : serverData.status === serverStatuses.ERROR ||
+                serverData.status === serverStatuses.PAUSED
               ? 'bg-red-500'
               : 'bg-blue-300'
           }`"
         >
-          {{
-            serverData.status === "ACTIVE"
-              ? "فعال"
-              : serverData.status === "ERROR"
-              ? "غیر فعال"
-              : serverData.status === "PAUSED"
-              ? "متوقف"
-              : "در حال ساخت "
-          }}
+          {{ vmStatusTitle }}
         </span>
       </div>
       <div
@@ -53,22 +46,29 @@
           >
             <v-list-item-title>مشاهده جزئیات</v-list-item-title>
           </v-list-item>
-          <v-list-item link>
+          <!-- <v-list-item link>
             <v-list-item-title>مدیریت نسخه های پشتیبان</v-list-item-title>
-          </v-list-item>
-          <v-list-item link @click="openDialog('hard_reboot')">
-            <v-list-item-title>ریبوت سخت افزاری سرور</v-list-item-title>
-          </v-list-item>
-          <v-list-item link @click="openDialog('soft_reboot')">
-            <v-list-item-title>ریبوت نرم افزاری سرور</v-list-item-title>
-          </v-list-item>
-          <v-list-item link @click="openDialog('stop')">
-            <v-list-item-title>متوقف کردن سرور</v-list-item-title>
-          </v-list-item>
-          <v-list-item link @click="openDialog('pause')">
-            <v-list-item-title>خاموش کردن سرور</v-list-item-title>
-          </v-list-item>
-          <v-list-item link @click="openDialog('suspend')">
+          </v-list-item> -->
+          <template
+            v-if="
+              serverData.status !== serverStatuses.ERROR &&
+              serverData.status !== serverStatuses.PAUSED
+            "
+          >
+            <v-list-item link @click="openDialog('hard_reboot')">
+              <v-list-item-title>ریبوت سخت افزاری سرور</v-list-item-title>
+            </v-list-item>
+            <v-list-item link @click="openDialog('soft_reboot')">
+              <v-list-item-title>ریبوت نرم افزاری سرور</v-list-item-title>
+            </v-list-item>
+            <v-list-item link @click="openDialog('pause')">
+              <v-list-item-title>متوقف کردن سرور</v-list-item-title>
+            </v-list-item>
+            <v-list-item link @click="openDialog('suspend')">
+              <v-list-item-title>خاموش کردن سرور</v-list-item-title>
+            </v-list-item>
+          </template>
+          <v-list-item link @click="openDialog('delete')">
             <v-list-item-title>حذف سرور</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -79,6 +79,7 @@
 
 <script>
 import moment from "moment-jalaali";
+import { VmStatuses } from "../../../../helpers/enums/enums";
 
 export default {
   props: {
@@ -88,14 +89,25 @@ export default {
     },
   },
   data() {
-    return {
-      id: 5,
-    };
-  },
-  mounted() {
-    console.log(this.serverData);
+    return {};
   },
   computed: {
+    vmStatusTitle() {
+      return this.serverData.status === VmStatuses.ACTIVE
+        ? "فعال"
+        : this.serverData.status === VmStatuses.ERROR
+        ? "ERROR"
+        : this.serverData.status === VmStatuses.PAUSED
+        ? "متوقف"
+        : this.serverData.status === VmStatuses.HARD_REBOOT
+        ? "ریبوت سخت افزاری"
+        : this.serverData.status === VmStatuses.REBOOT
+        ? "ریبوت نرم افزاری"
+        : "در حال ساخت ";
+    },
+    serverStatuses() {
+      return VmStatuses;
+    },
     createdAt() {
       return moment(this.serverData.created).format("HH:mm - jYYYY/jMM/jDD");
     },
@@ -112,7 +124,7 @@ export default {
             ? "StopMachineDialog"
             : dialogType === "pause"
             ? "TurnOffMachineDialog"
-            : dialogType === "suspend"
+            : dialogType === "delete"
             ? "DeleteMachineDialog"
             : "",
         data: {

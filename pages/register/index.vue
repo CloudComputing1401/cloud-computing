@@ -44,6 +44,14 @@
                   /></v-col>
                   <v-col cols="12" class="py-0"
                     ><v-text-field
+                      v-model="registerData.mobile"
+                      outlined
+                      label="شماره همراه"
+                      placeholder="شماره همراه خود را وارد کنید"
+                      :rules="mobileRules"
+                  /></v-col>
+                  <v-col cols="12" class="py-0"
+                    ><v-text-field
                       v-model="registerData.password"
                       :type="showPassword ? 'text' : 'password'"
                       outlined
@@ -53,15 +61,6 @@
                       maxlength="50"
                       :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                       @click:append="showPassword = !showPassword"
-                  /></v-col>
-                  <v-col cols="12" class="py-0"
-                    ><v-text-field
-                      v-model="registerData.mobile"
-                      type="number"
-                      outlined
-                      label="شماره همراه"
-                      placeholder="شماره همراه خود را وارد کنید"
-                      :rules="mobileRules"
                   /></v-col>
                 </v-row>
                 <v-btn
@@ -78,7 +77,7 @@
               </v-form>
             </div>
           </div>
-          <div class="flex-center mt-1.5">
+          <div class="flex-center mt-3">
             <span class="regular">آیا حساب کاربری دارید؟</span>
             <span
               class="mx-2 bold text-[#060d2d] cursor-pointer"
@@ -96,12 +95,10 @@
         </v-col>
       </v-row>
     </div>
-    <snack-bar />
   </div>
 </template>
 
 <script>
-import SnackBar from "../../components/core/SnackBar/SnackBar.vue";
 export default {
   layout: "login",
   data() {
@@ -112,6 +109,7 @@ export default {
         firstName: "",
         lastName: "",
         email: "",
+        mobile: "",
         password: "",
       },
       showPassword: false,
@@ -142,16 +140,12 @@ export default {
     firstNameRules() {
       return [
         (v) => !!v || "وارد کردن نام الزامی است",
-        (v) =>
-          !!v.match(/^[\u0600-\u06FF\s]+$/) || "از حروف فارسی استفاده کنید.",
         (v) => v.length > 2 || "نام باید حداقل 3 کاراکتر باشد",
       ];
     },
     lastNameRules() {
       return [
         (v) => !!v || "وارد کردن نام خانوادگی الزامی است",
-        (v) =>
-          !!v.match(/^[\u0600-\u06FF\s]+$/) || "از حروف فارسی استفاده کنید.",
         (v) => v.length > 2 || "نام خانوادگی باید حداقل 3 کاراکتر باشد",
       ];
     },
@@ -169,7 +163,7 @@ export default {
   methods: {
     async registerHandler() {
       if (this.$refs.validForm.validate()) {
-        this.$store.commit("Auth/clear");
+        this.$axios.setHeader("Authorization", null);
         this.loading = true;
         try {
           const data = await this.$axios.post("users/register/", {
@@ -177,28 +171,25 @@ export default {
             last_name: this.registerData.lastName,
             password: this.registerData.password,
             email: this.registerData.email,
+            phone_number: this.registerData.mobile,
           });
           this.loading = false;
-          this.$store.dispatch(
-            "SnackBar/show",
-            "ثبت نام شما با موفقیت انجام شد."
-          );
+
+          this.$toast.success("ثبت نام شما با موفقیت انجام شد.", {
+            timeout: 3000,
+          });
           setTimeout(() => {
             this.$router.push("/login");
-          }, 2000);
+          }, 3000);
         } catch (err) {
           this.loading = false;
           this.errorMessage = "مشکل در ارسال اطلاعات";
           if (err.response.status === 400)
             this.errorMessage = "ایمیل وارد شده تکراری میباشد";
-          this.$store.dispatch(
-            "SnackBar/show",
-            {
-              text: this.errorMessage,
-              type: "error",
-            },
-            4000
-          );
+
+          this.$toast.error(this.errorMessage, {
+            timeout: 4000,
+          });
         }
       }
     },

@@ -34,7 +34,6 @@
         </div>
       </div>
     </div>
-    <snack-bar />
   </div>
 </template>
 
@@ -56,8 +55,9 @@ export default {
           }
         );
         this.loading = false;
-        this.$store.dispatch("SnackBar/show", "پروژه با موفقیت حذف شد.");
-        await new Promise((resolve) => setTimeout(resolve, 2500));
+        this.$toast.success("پروژه با موفقیت حذف شد.", {
+          timeout: 3000,
+        });
         this.$router.push(`/panel/projects`);
       } catch (err) {
         this.loading = false;

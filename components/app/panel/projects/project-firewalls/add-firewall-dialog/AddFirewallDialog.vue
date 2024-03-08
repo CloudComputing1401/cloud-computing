@@ -39,7 +39,6 @@
         </div>
       </v-form>
     </div>
-    <snack-bar />
   </v-dialog>
 </template>
 
@@ -95,8 +94,10 @@ export default {
             }
           );
           this.loading = false;
-          this.$store.dispatch("SnackBar/show", "گروه با موفقیت ایجاد شد.");
-          await new Promise((resolve) => setTimeout(resolve, 2000));
+
+          this.$toast.success("گروه با موفقیت ایجاد شد.", {
+            timeout: 3000,
+          });
           this.$emit("update");
           this.dialog = false;
         } catch (err) {

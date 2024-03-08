@@ -33,7 +33,6 @@
         </v-col>
       </v-row>
     </div>
-    <snack-bar />
   </v-container>
 </template>
 
@@ -83,11 +82,9 @@ export default {
             }
           );
           this.loading = false;
-          this.$store.dispatch(
-            "SnackBar/show",
-            "اطلاعات پروژه با موفقیت ویرایش شد."
-          );
-          await new Promise((resolve) => setTimeout(resolve, 2500));
+          this.$toast.success("اطلاعات پروژه با موفقیت به‌روز شد.", {
+            timeout: 3000,
+          });
           this.$router.push(`/panel/projects/${this.$route.params.id}`);
         } catch (err) {
           this.loading = false;

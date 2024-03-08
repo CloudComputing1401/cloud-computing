@@ -117,13 +117,11 @@ export default {
           formData.append("description", this.description);
           formData.append("photo", this.imageFile);
           const data = await this.$post("wallet/user_requests/", formData);
-          console.log(data, "data");
           this.loading = false;
-          this.$store.dispatch(
-            "SnackBar/show",
-            "درخواست شما با موفقیت ثبت شد."
-          );
-          await new Promise((resolve) => setTimeout(resolve, 2000));
+
+          this.$toast.success("درخواست شما با موفقیت ثبت شد.", {
+            timeout: 3000,
+          });
           this.dialog = false;
         } catch (err) {
           this.loading = false;
